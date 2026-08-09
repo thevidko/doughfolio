@@ -1,27 +1,39 @@
-import logoUrl from "./assets/logo.png";
-import { ServerStatus } from "./components/ServerStatus.tsx";
+import { Navigate, Route, Routes } from "react-router";
+import { Splash } from "./components/Splash.tsx";
+import { SetupStatusProvider, useSetupStatus } from "./hooks/useSetupStatus.tsx";
+import { Dashboard } from "./pages/Dashboard.tsx";
+import { Login } from "./pages/Login.tsx";
+import { NotFound } from "./pages/NotFound.tsx";
+import { SetupWizard } from "./pages/SetupWizard.tsx";
 
-/** Root application component — currently a themed hello-world landing page. */
+/** Root application component. */
 export function App() {
   return (
-    <main className="flex min-h-dvh flex-col items-center justify-center gap-8 p-6 text-center">
-      <img
-        src={logoUrl}
-        alt="DoughFolio — a happy dumpling hugging a treasure chest full of crypto coins"
-        className="w-full max-w-xl drop-shadow-md"
-      />
+    <SetupStatusProvider>
+      <GatedRoutes />
+    </SetupStatusProvider>
+  );
+}
 
-      <div className="space-y-3">
-        <h1 className="text-3xl font-extrabold tracking-tight">
-          Welcome to <span className="text-dough">Dough</span>
-          <span className="text-matcha-dark">Folio</span>!
-        </h1>
-        <p className="mx-auto max-w-md text-lg text-ink-soft">
-          Your cute self-hosted crypto portfolio tracker. Fresh out of the steamer&nbsp;🥟
-        </p>
-      </div>
+/**
+ * Setup/auth gate (setup-wizard spec): an unconfigured instance forces
+ * `/setup`, a configured one never shows it again, and a password-protected
+ * instance asks for the password before revealing anything.
+ */
+function GatedRoutes() {
+  const state = useSetupStatus();
 
-      <ServerStatus />
-    </main>
+  if (state.phase === "loading") return <Splash />;
+  if (state.phase === "failed") return <Splash failed />;
+
+  const { completed, passwordRequired, authenticated } = state.status;
+  if (completed && passwordRequired && !authenticated) return <Login />;
+
+  return (
+    <Routes>
+      <Route path="/setup" element={completed ? <Navigate to="/" replace /> : <SetupWizard />} />
+      <Route path="/" element={completed ? <Dashboard /> : <Navigate to="/setup" replace />} />
+      <Route path="*" element={completed ? <NotFound /> : <Navigate to="/setup" replace />} />
+    </Routes>
   );
 }

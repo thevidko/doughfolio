@@ -1,0 +1,77 @@
+{
+  "common": {
+    "appName": "DoughFolio",
+    "next": "Next",
+    "back": "Back",
+    "skip": "Skip",
+    "loading": "Warming up the steamer…",
+    "logout": "Log out"
+  },
+  "errors": {
+    "validation": "Please check the highlighted fields.",
+    "invalidPassword": "That password is not correct.",
+    "noPasswordSet": "This instance is not password-protected.",
+    "setupAlreadyCompleted": "Setup has already been completed.",
+    "unknownFeature": "Unknown feature.",
+    "network": "Cannot reach the server. Is the instance running?",
+    "envMissing": "Missing configuration: {{vars}}. Add it to your .env file, restart the instance, and try again.",
+    "envCheckAgain": "Check again"
+  },
+  "setup": {
+    "steps": {
+      "welcome": "Welcome",
+      "name": "Name",
+      "password": "Password",
+      "currency": "Currency",
+      "wallets": "Wallets",
+      "done": "Done"
+    },
+    "welcome": {
+      "title": "Welcome to DoughFolio!",
+      "subtitle": "Let's get your dumpling pantry ready — it takes under a minute.",
+      "language": "Language"
+    },
+    "name": {
+      "title": "What should we call you?",
+      "placeholder": "Your name",
+      "hint": "Used only for greetings — feel free to skip it."
+    },
+    "password": {
+      "title": "Protect your instance?",
+      "protect": "Protect with a password",
+      "skipInfo": "Skip this if you secure the instance yourself (for example behind a reverse proxy). Anyone who can reach the page will see your portfolio.",
+      "placeholder": "Password (min. 8 characters)",
+      "confirmPlaceholder": "Repeat password",
+      "mismatch": "The passwords do not match."
+    },
+    "currency": {
+      "title": "Pick your base currency",
+      "hint": "All portfolio values are calculated in this currency. You can change it later in Settings.",
+      "search": "Search currencies…"
+    },
+    "wallets": {
+      "title": "Create your first wallets",
+      "hint": "Just names for now — you can add more anytime.",
+      "placeholder": "e.g. Cold storage",
+      "add": "Add another wallet",
+      "remove": "Remove",
+      "finish": "Finish setup"
+    },
+    "done": {
+      "title": "All set!",
+      "subtitle": "Your dumpling is happy and your pantry is ready.",
+      "cta": "Open my portfolio"
+    }
+  },
+  "login": {
+    "title": "Welcome back!",
+    "subtitle": "This instance is password-protected.",
+    "placeholder": "Password",
+    "submit": "Unlock"
+  },
+  "dashboard": {
+    "greeting": "Welcome back, {{name}}!",
+    "greetingAnonymous": "Welcome back!",
+    "empty": "Your portfolio is still steaming — transactions arrive in the next course. 🥟"
+  }
+}

@@ -1,24 +1,26 @@
 @import "tailwindcss";
 
 /*
- * DoughFolio design tokens — colors sampled from the brand logo.
- * Always use these semantic tokens (e.g. `bg-cream`, `text-ink`) instead of
- * raw Tailwind palette colors so the kawaii look stays consistent.
+ * DoughFolio design tokens — see docs/DESIGN.md for the full guide.
+ * Components use ONLY these semantic tokens (bg-cream, text-ink, font-display…)
+ * so the whole look can be re-themed here without touching components.
  */
 @theme {
   /* Warm paper background, like a steamed bun wrapper. */
   --color-cream: #faf4e8;
   --color-cream-dark: #f0e6d2;
+  /* Raised surfaces (cards) — slightly brighter than the paper. */
+  --color-surface: #fffdf8;
 
   /* "Dough" — warm golden brown, primary brand color. */
   --color-dough: #e0a34e;
   --color-dough-dark: #c9883a;
 
-  /* "Folio" — soft matcha green, used for positive values and accents. */
+  /* "Folio" — soft matcha green, positive values and accents. */
   --color-matcha: #a9d18d;
   --color-matcha-dark: #7fb45e;
 
-  /* Blush pink — mascot cheeks, used for negative values and warnings. */
+  /* Blush pink — mascot cheeks, negative values and warnings. */
   --color-blush: #f2a0a8;
   --color-blush-dark: #e0717c;
 
@@ -26,10 +28,95 @@
   --color-ink: #4a3728;
   --color-ink-soft: #8a715c;
 
-  --font-sans: "Nunito", "Quicksand", ui-rounded, system-ui, sans-serif;
+  /* Typography (self-hosted via @fontsource, imported in main.tsx). */
+  --font-sans: "Nunito", ui-rounded, system-ui, sans-serif;
+  --font-display: "Baloo 2", "Nunito", ui-rounded, system-ui, sans-serif;
+
+  /* Motion — "everything pops" (docs/DESIGN.md). Retune the feel here. */
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-pop: 220ms;
+}
+
+/* Warm cocoa dark theme — same hues, cozy instead of gray (DESIGN.md). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-cream: #2b211a;
+    --color-cream-dark: #241b15;
+    --color-surface: #3a2e24;
+    --color-dough: #e8b061;
+    --color-dough-dark: #d1974a;
+    --color-matcha: #b3d998;
+    --color-matcha-dark: #8cc06b;
+    --color-blush: #f4abb2;
+    --color-blush-dark: #e58089;
+    --color-ink: #f0e6d2;
+    --color-ink-soft: #b49a82;
+  }
 }
 
 body {
   background-color: var(--color-cream);
   color: var(--color-ink);
+  /* Faint pencil doodles (star + coin) scattered on the paper. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%234a3728' stroke-opacity='0.05' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M40 34l3.5 8 8.5 1-6 6 1.5 8.5-7.5-4-7.5 4 1.5-8.5-6-6 8.5-1z'/%3E%3Ccircle cx='168' cy='78' r='12'/%3E%3Cpath d='M168 71v14M163 74h10M163 82h10'/%3E%3Cpath d='M96 170l2.5 5.5 6 .7-4.3 4.3 1 6-5.2-2.8-5.2 2.8 1-6-4.3-4.3 6-.7z'/%3E%3Ccircle cx='52' cy='128' r='2.2'/%3E%3Ccircle cx='196' cy='170' r='2.2'/%3E%3Ccircle cx='128' cy='36' r='2.2'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+/*
+ * Hand-drawn irregular outlines — three rotations of the uneven-radius trick
+ * so repeated elements don't look stamped (DESIGN.md).
+ */
+.wobbly {
+  border-radius: 255px 25px 225px 25px / 25px 225px 25px 255px;
+}
+.wobbly-2 {
+  border-radius: 25px 255px 25px 225px / 225px 25px 255px 25px;
+}
+.wobbly-3 {
+  border-radius: 225px 25px 255px 25px / 25px 255px 25px 225px;
+}
+
+/* Pop-in for appearing elements (scale overshoot). */
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-pop {
+  animation: pop-in var(--duration-pop) var(--ease-pop) both;
+}
+
+/* Slow idle bob for the mascot ("breathing"). */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+.animate-bob {
+  animation: bob 3.2s ease-in-out infinite;
+}
+
+/* Decorative motion is optional — accessibility is not (DESIGN.md). */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop,
+  .animate-bob {
+    animation: none;
+  }
 }
