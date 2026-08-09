@@ -79,10 +79,9 @@ Deliberately **not** recommended for now:
 - **Plan:** multi-stage `Dockerfile` (oven/bun base image) + `docker-compose.yml`
   with a volume for the SQLite file; GitHub Actions running `bun run check` on
   every PR and building the image on tags.
-- **Decision (2026-08-09):** branching model and release channels are settled —
-  see `docs/WORKFLOW.md` (main = stable + tags, develop = dev builds,
-  feature/* + helper scripts). The CI pipeline + Docker part is **proposed** in
-  that document and awaits the owner's approval before implementation.
+- **Decision (2026-08-09):** implemented. Branching model, release channels,
+  GitHub Actions pipelines and Docker packaging are all described in
+  `docs/WORKFLOW.md`.
 
 ### 7. Base currency & localization
 - **Recommendation:** user-configurable base currency (USD/EUR/CZK…) from day
