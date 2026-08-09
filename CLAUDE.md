@@ -123,6 +123,9 @@ Import via path aliases, never deep relative paths: `@client/*`, `@server/*`, `@
   responses). Never trust data from outside the process.
 - The app is **self-hosted**: it must run fully offline except for explicit
   price-data fetches, store data locally, and never phone home.
+- Schema changes only via new `drizzle-kit` migrations — shipped migrations are
+  append-only and apply automatically on startup (upgrade rules:
+  `docs/PLANNING.md` #14).
 
 ## Testing
 
