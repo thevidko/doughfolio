@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Repo-managed pre-commit hook (activated via `git config core.hooksPath`,
+# which the package.json "prepare" script sets automatically on `bun install`).
+#
+# Runs the full quality gate before every commit, so even commits made with
+# raw git (outside the bun run save/finish/release scripts) cannot be red.
+# The workflow scripts run the same gate themselves and set SKIP_CHECK=1 to
+# avoid paying for it twice.
+set -euo pipefail
+
+if [[ "${SKIP_CHECK:-}" == "1" ]]; then
+  exit 0
+fi
+
+bun run check

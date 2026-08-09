@@ -48,23 +48,40 @@ bun run check      # typecheck + lint + tests (run before finishing any task)
 
 ## Project structure
 
+The layout below is the **target structure** — directories marked *(future)*
+are created the first time a feature needs them, never pre-created empty.
+When adding a file, place it according to this map; do not invent new
+top-level directories without updating this document.
+
 ```
 src/
   client/            # React frontend (SPA)
     assets/          # web-optimized images
-    components/      # reusable UI components (one component per file)
+    components/      # reusable UI components (one component per file, no page logic)
+    pages/           # route-level components, one per screen        (future)
+    hooks/           # shared React hooks                            (future)
+    i18n/            # i18next setup + en.json / cs.json catalogs    (future)
+    lib/             # client-only helpers                           (future)
     styles/          # global CSS + Tailwind design tokens
     App.tsx          # root component
     index.html       # entry — bundled by Bun's fullstack server
     main.tsx         # React bootstrap
   server/            # backend
-    routes/          # one module per API route + colocated *.test.ts
+    db/              # drizzle schema + migrations/                  (future)
+    routes/          # one thin module per API route + colocated *.test.ts
+    services/        # business logic, called by routes              (future)
+    lib/             # server-only helpers                           (future)
     index.ts         # Bun.serve entrypoint
-  shared/            # code shared by client & server (API types, utils)
+  shared/            # code shared by client & server:
+                     #   API contract types, money module, P/L engine, formatting
 assets/branding/     # original brand assets (not bundled)
+docs/                # PLANNING.md, WORKFLOW.md, features/ specs
+scripts/git/         # workflow helper scripts + git hooks
 ```
 
 Import via path aliases, never deep relative paths: `@client/*`, `@server/*`, `@shared/*`.
+Dependency direction: `client` and `server` may import from `shared`;
+`shared` imports from neither; `client` and `server` never import each other.
 
 ## Hard rules
 

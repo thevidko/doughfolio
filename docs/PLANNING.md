@@ -182,3 +182,32 @@ Deliberately **not** recommended for now:
 ### 17. Timestamps
 - **Decision (2026-08-09):** storage and API use UTC ISO 8601 strings
   exclusively; conversion to local time happens only in the UI layer.
+
+### 18. Configuration precedence
+- **Decision (2026-08-09):** two clearly separated layers:
+  - **Environment variables** = infrastructure concerns (`PORT`, `DATA_DIR`),
+    set by the self-hoster, documented in `.env.example`.
+  - **Database settings** = user preferences (language, base currency, theme,
+    cost-basis method, password), edited in the app's settings UI.
+  A value never lives in both layers.
+
+### 19. Logging
+- **Decision (2026-08-09):** log to stdout/stderr only (Docker-friendly,
+  `docker logs` just works) via `console.info/warn/error` — no log files, no
+  logging library until a concrete need appears.
+
+### 20. API/frontend compatibility
+- **Decision (2026-08-09):** no API versioning. Frontend and backend always
+  ship together in one image, and the contract is enforced at compile time by
+  the shared types in `src/shared/`.
+
+### 21. Contributor & agent automation
+- **Decision (2026-08-09):** conventions are enforced by machines, not memory:
+  - Pre-commit hook runs `bun run check` (activated automatically by the
+    `prepare` script on `bun install`; workflow scripts skip the duplicate run).
+  - CI runs the same gate on every PR; images only build after green checks.
+  - VS Code workspace settings format with Biome on save; issue/PR templates
+    and `CONTRIBUTING.md` route outside contributors through the same rules.
+- **Future (when outside contributors appear):** enable GitHub branch
+  protection on `main`/`develop` requiring the CI check, and consider Renovate
+  (needs the GitHub App installed by the owner) for dependency updates.
