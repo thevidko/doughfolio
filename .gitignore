@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+
+# Environment & local overrides (never commit secrets)
+.env
+.env.*
+!.env.example
+*.local
+
+# Test coverage
+coverage/
+
+# Editor & OS noise
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Runtime data (self-hosted instance state lives outside the repo)
+data/
+*.sqlite
+*.sqlite-*

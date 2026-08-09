@@ -1,0 +1,5 @@
+# Bun configuration — https://bun.com/docs/runtime/bunfig
+
+# Tailwind CSS support in Bun's fullstack dev server / bundler.
+[serve.static]
+plugins = ["bun-plugin-tailwind"]

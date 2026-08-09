@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/*
+ * DoughFolio design tokens — colors sampled from the brand logo.
+ * Always use these semantic tokens (e.g. `bg-cream`, `text-ink`) instead of
+ * raw Tailwind palette colors so the kawaii look stays consistent.
+ */
+@theme {
+  /* Warm paper background, like a steamed bun wrapper. */
+  --color-cream: #faf4e8;
+  --color-cream-dark: #f0e6d2;
+
+  /* "Dough" — warm golden brown, primary brand color. */
+  --color-dough: #e0a34e;
+  --color-dough-dark: #c9883a;
+
+  /* "Folio" — soft matcha green, used for positive values and accents. */
+  --color-matcha: #a9d18d;
+  --color-matcha-dark: #7fb45e;
+
+  /* Blush pink — mascot cheeks, used for negative values and warnings. */
+  --color-blush: #f2a0a8;
+  --color-blush-dark: #e0717c;
+
+  /* Hand-drawn outline brown, primary text color. */
+  --color-ink: #4a3728;
+  --color-ink-soft: #8a715c;
+
+  --font-sans: "Nunito", "Quicksand", ui-rounded, system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+}
