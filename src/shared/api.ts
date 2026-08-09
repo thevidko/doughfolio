@@ -15,3 +15,46 @@ export type HealthResponse = {
   /** ISO 8601 timestamp of when the response was generated. */
   timestamp: string;
 };
+
+/**
+ * Uniform error envelope returned by every API endpoint on failure
+ * (PLANNING #13). `messageKey` is an i18n key so the client renders the
+ * message in the active language; `code` is stable and machine-readable.
+ */
+export type ApiError = {
+  error: {
+    code: string;
+    messageKey: string;
+    details?: unknown;
+  };
+};
+
+/** Response body of `GET /api/setup/status`. */
+export type SetupStatusResponse = {
+  /** Whether the first-run setup wizard has been completed. */
+  completed: boolean;
+  /** Whether a password protects this instance. */
+  passwordRequired: boolean;
+  /** True when the request carries a valid session, or no password is set. */
+  authenticated: boolean;
+  /** Stored UI language (BCP 47 short code), null before setup. */
+  language: string | null;
+  /** Display name for greetings, null when the user skipped it or pre-setup. */
+  displayName: string | null;
+};
+
+/** Response body of `POST /api/setup/complete`. */
+export type SetupCompleteResponse = { ok: true };
+
+/** Response body of `GET/POST /api/session`. */
+export type SessionResponse = {
+  authenticated: boolean;
+  displayName: string | null;
+};
+
+/** Response body of `GET /api/env-status?feature=…` (see setup-wizard spec). */
+export type EnvStatusResponse = {
+  feature: string;
+  /** Names of required environment variables that are not set. */
+  missing: string[];
+};

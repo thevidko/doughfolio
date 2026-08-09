@@ -29,7 +29,8 @@ bun run check
 bun pm pkg set version="$version"
 git add package.json
 if ! git diff --cached --quiet; then
-  git commit -m "chore: release v$version"
+  # The pre-commit hook is skipped because the gate above already ran.
+  SKIP_CHECK=1 git commit -m "chore: release v$version"
 fi
 
 git checkout main

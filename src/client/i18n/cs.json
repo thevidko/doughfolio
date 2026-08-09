@@ -1,0 +1,82 @@
+{
+  "common": {
+    "appName": "DoughFolio",
+    "next": "Pokračovat",
+    "back": "Zpět",
+    "skip": "Přeskočit",
+    "loading": "Zahřívám napařovák…",
+    "logout": "Odhlásit se"
+  },
+  "errors": {
+    "validation": "Zkontroluj prosím zvýrazněná pole.",
+    "invalidPassword": "Tohle heslo není správné.",
+    "noPasswordSet": "Tahle instance není chráněná heslem.",
+    "setupAlreadyCompleted": "Nastavení už bylo dokončeno.",
+    "unknownFeature": "Neznámá funkce.",
+    "network": "Server neodpovídá. Běží instance?",
+    "envMissing": "Chybí konfigurace: {{vars}}. Přidej ji do souboru .env, restartuj instanci a zkus to znovu.",
+    "envCheckAgain": "Zkontrolovat znovu"
+  },
+  "setup": {
+    "steps": {
+      "welcome": "Vítej",
+      "name": "Jméno",
+      "password": "Heslo",
+      "currency": "Měna",
+      "wallets": "Peněženky",
+      "done": "Hotovo"
+    },
+    "welcome": {
+      "title": "Vítej v DoughFoliu!",
+      "subtitle": "Připravíme tvoji knedlíčkovou spižírnu — zabere to ani ne minutu.",
+      "language": "Jazyk"
+    },
+    "name": {
+      "title": "Jak ti máme říkat?",
+      "placeholder": "Tvoje jméno",
+      "hint": "Použije se jen pro pozdravy — klidně přeskoč."
+    },
+    "password": {
+      "title": "Chránit instanci heslem?",
+      "protect": "Chránit heslem",
+      "skipInfo": "Přeskoč, pokud si zabezpečení řešíš sám (třeba reverzní proxy). Kdokoli se stránkou setká, tvoje portfolio uvidí.",
+      "placeholder": "Heslo (min. 8 znaků)",
+      "confirmPlaceholder": "Heslo znovu",
+      "mismatch": "Hesla se neshodují."
+    },
+    "currency": {
+      "title": "Vyber základní měnu",
+      "hint": "Ve zvolené měně se počítá hodnota celého portfolia. Později ji můžeš změnit v nastavení.",
+      "search": "Hledat měnu…"
+    },
+    "wallets": {
+      "title": "Založ první peněženky",
+      "hint": "Zatím jen názvy — další přidáš kdykoli.",
+      "placeholder": "např. Hodl trezor",
+      "add": "Přidat další peněženku",
+      "remove": "Odebrat",
+      "finish": "Dokončit nastavení"
+    },
+    "done": {
+      "title": "A je to!",
+      "subtitle": "Tvůj knedlíček je šťastný a spižírna připravená.",
+      "cta": "Otevřít portfolio"
+    }
+  },
+  "login": {
+    "title": "Vítej zpátky!",
+    "subtitle": "Tahle instance je chráněná heslem.",
+    "placeholder": "Heslo",
+    "submit": "Odemknout"
+  },
+  "dashboard": {
+    "greeting": "Vítej zpátky, {{name}}!",
+    "greetingAnonymous": "Vítej zpátky!",
+    "empty": "Portfolio se ještě napařuje — transakce dorazí v dalším chodu. 🥟"
+  },
+  "serverStatus": {
+    "checking": "Kontroluji napařovák…",
+    "offline": "Server je offline",
+    "online": "Server napařuje — v{{version}}"
+  }
+}
