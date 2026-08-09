@@ -54,3 +54,4 @@ The intended GitHub Actions setup, to be confirmed before any files are added:
    + `:latest`, and creates a GitHub Release with generated notes.
 4. **Docker** — multi-stage image based on `oven/bun`, SQLite data in a `/data`
    volume, container healthcheck via `GET /api/health`.
+# smoke test
