@@ -42,15 +42,17 @@ see `CLAUDE.md`.
 - **Dev (edge)** — the tip of `develop`. Once CI/CD is set up, every merge to
   `develop` will produce a dev build automatically.
 
-## Planned CI/CD (pending approval — do not implement yet)
+## CI/CD (approved 2026-08-09)
 
-The intended GitHub Actions setup, to be confirmed before any files are added:
-
-1. **Checks** — every PR and every push to `develop`/`main` runs `bun run check`.
-2. **Dev builds** — every merge to `develop` publishes a Docker image
-   `ghcr.io/<owner>/doughfolio:edge` (per-merge "nightly"; simpler and fresher
-   than a cron-based nightly, can switch to cron later if image churn is an issue).
-3. **Stable builds** — pushing a `v*` tag publishes `ghcr.io/<owner>/doughfolio:X.Y.Z`
-   + `:latest`, and creates a GitHub Release with generated notes.
-4. **Docker** — multi-stage image based on `oven/bun`, SQLite data in a `/data`
-   volume, container healthcheck via `GET /api/health`.
+1. **Checks** (`.github/workflows/ci.yml`) — every PR and every push to
+   `develop`/`main` runs `bun run check`.
+2. **Dev builds** (`.github/workflows/dev-build.yml`) — every merge to `develop`
+   publishes the Docker image `ghcr.io/thevidko/doughfolio:edge` (per-merge
+   "nightly"; always current, nothing builds when nothing changed).
+3. **Stable builds** (`.github/workflows/release.yml`) — pushing a `v*` tag
+   (done by `bun run release`) re-runs the checks, publishes
+   `ghcr.io/thevidko/doughfolio:X.Y.Z` + `:latest`, and creates a GitHub
+   Release with generated notes.
+4. **Docker** (`Dockerfile`, `docker-compose.yml`) — image based on `oven/bun`;
+   Bun bundles the frontend at startup so no build stage is needed. SQLite data
+   lives in the `/data` volume; container healthcheck hits `GET /api/health`.
