@@ -16,8 +16,10 @@ mean and how the style behaves.
 **"Drawn with pencil and crayons."** The whole UI looks hand-drawn: soft,
 slightly irregular lines, warm cozy colors, paper texture. Kawaii Japanese
 dumpling (bao/dango) theme throughout — friendly, plump, gentle. Reference:
-`assets/branding/logo-full.png` (the logo will still evolve, but the mood is
-fixed: chubby lettering, blush cheeks, sketchy doodles).
+`assets/branding/logo-full.png`. The mascot character and lettering are
+settled; only the logo's surroundings (the coin chest composition, background
+details) will still be reworked — so the palette and the character itself are
+safe to build on.
 
 Practical translation:
 
@@ -129,11 +131,12 @@ The dumpling character appears in the UI, not just the logo:
 
 - **Phase 1 (now):** static mascot image with a CSS idle loop — slow bob
   (breathing) and occasional blink; floats on the landing/empty states.
-- **Phase 2 (after the logo redesign settles):** proper animated asset —
-  sprite sheet or Lottie/Rive export — with a small set of states: idle,
-  happy (portfolio up / action succeeded), sad-cute (losses / errors),
-  sleeping (empty portfolio). Decision on the tool belongs to the logo
-  redesign; don't invest in animating artwork that will be replaced.
+- **Phase 2:** proper animated asset — sprite sheet or Lottie/Rive export —
+  with a small set of states: idle, happy (portfolio up / action succeeded),
+  sad-cute (losses / errors), sleeping (empty portfolio). The mascot design is
+  final (only the logo's background composition will change), so this work can
+  start whenever animation becomes a priority — it just needs the character
+  cut out as a standalone asset first.
 - The mascot is decoration: it must never block content, and it hides under
   `prefers-reduced-motion`.
 
