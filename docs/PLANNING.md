@@ -14,6 +14,8 @@ added only when its feature area is being implemented, not before.
 | --- | --- | --- |
 | `zod` | Validation | Validate all external input (request bodies, third-party price APIs) at the boundary; infers TS types so the schema is the single source of truth. |
 | `drizzle-orm` (+ built-in `bun:sqlite`) | Database | Type-safe SQL with zero runtime overhead; SQLite keeps self-hosting trivial (one file, backup = copy). Drizzle has first-class Bun SQLite support and built-in migrations. |
+| `decimal.js` | Money math | Arbitrary-precision decimal arithmetic — see decision 9; floats are forbidden for amounts. |
+| `i18next` + `react-i18next` | Localization | Typed translation keys, JSON catalogs (EN + CS to start), correct Czech plural rules — see decision 7. |
 | `@tanstack/react-query` | FE data fetching | Caching, refetching, and loading/error states for API calls; removes hand-written `useEffect` fetch code (like in `ServerStatus.tsx`). |
 | `@tanstack/react-router` or `react-router` | FE routing | Needed once the app has more than one page (dashboard, transactions, settings). TanStack Router has the better TypeScript story; decide when routing is added. |
 | `lightweight-charts` | Charts | TradingView's canvas chart library — built for financial time series, small, fast. Alternative: Recharts (SVG, easier to style kawaii, weaker with large datasets). |
@@ -85,9 +87,16 @@ Deliberately **not** recommended for now:
 
 ### 7. Base currency & localization
 - **Recommendation:** user-configurable base currency (USD/EUR/CZK…) from day
-  one — retrofitting it into P/L math is painful. UI in English only for now,
-  but all user-facing strings kept in one place so i18n can be added later.
-- **Decision (2026-08-09):** per recommendation (delegated by the owner).
+  one — retrofitting it into P/L math is painful.
+- **Decision (2026-08-09, revised):** base currency configurable from day one.
+  Full i18n from the start: **English + Czech** catalogs, architecture open to
+  more languages. All user-facing strings go through typed translation keys —
+  hardcoded UI copy is forbidden. Language is chosen in the first-run setup
+  wizard and changeable later in settings (stored in the DB, defaulting to the
+  browser language). Server-side messages (e.g. validation errors) return
+  translation keys so the client renders them in the active language.
+  Implementation: `i18next` + `react-i18next` with typed resources — mature,
+  handles Czech plural rules, and catalogs are plain JSON per language.
 
 ### 8. Portfolio history
 - **Problem:** the value-over-time chart needs historical portfolio snapshots.
@@ -97,3 +106,57 @@ Deliberately **not** recommended for now:
   (cached in SQLite) — works retroactively and survives downtime; snapshots can
   be added later as a cache layer.
 - **Decision (2026-08-09):** per recommendation (delegated by the owner).
+
+### 9. Money precision
+- **Problem:** crypto amounts have up to 18 decimal places; IEEE floats corrupt
+  them (`0.1 + 0.2 !== 0.3`).
+- **Decision (2026-08-09):** amounts and prices are **never** represented as
+  `number` in business logic. Storage: SQLite `TEXT` holding decimal strings.
+  Arithmetic: `decimal.js` in a shared money module (`src/shared/`), used by
+  both server and client. `number` is allowed only at the very edge for chart
+  rendering, never for stored values or P/L math.
+
+### 10. Cost basis method
+- **Options:** FIFO vs. weighted average (both acceptable for Czech taxes).
+- **Decision (2026-08-09, owner):** **both, selectable in settings.** The P/L
+  engine lives in `src/shared/`, is implemented against the raw transaction
+  log (so both methods derive from the same data), and gets exhaustive unit
+  tests — this is the most correctness-critical code in the app.
+
+### 11. Asset identity
+- **Decision (2026-08-09):** the canonical asset identifier is the
+  **CoinGecko ID** (e.g. `bitcoin`); ticker symbols are display-only (symbols
+  collide). Custom/unlisted assets with manual prices are a later feature but
+  the schema keeps `asset_id` open to non-CoinGecko namespaces.
+
+### 12. Theming
+- **Decision (2026-08-09, owner):** light **and** dark mode from day one —
+  system preference as default, toggle in settings. The kawaii palette gets a
+  warm-dark variant via the existing design tokens; components must only ever
+  use semantic tokens so both themes stay consistent.
+
+### 13. API conventions
+- **Decision (2026-08-09):** REST under `/api/*`, JSON only. Errors use a
+  single envelope: `{ "error": { "code": "...", "messageKey": "...",
+  "details"?: {...} } }` where `messageKey` is an i18n key. All request input
+  validated with `zod` at the boundary; schemas shared via `src/shared/`.
+
+### 14. Database migrations
+- **Decision (2026-08-09):** `drizzle-kit` generated SQL migrations, committed
+  to the repo and **applied automatically on server startup** — self-hosters
+  should never run migration commands manually.
+
+### 15. Data portability
+- **Decision (2026-08-09):** users own their data: CSV/JSON export and CSV
+  transaction import are first-class planned features (post-MVP), and the
+  schema/docs must keep them cheap — another reason all state lives in one
+  SQLite file.
+
+### 16. First-run setup wizard
+- **Decision (2026-08-09):** on first launch the app shows a setup wizard:
+  language → optional password → base currency. All three changeable later in
+  settings.
+
+### 17. Timestamps
+- **Decision (2026-08-09):** storage and API use UTC ISO 8601 strings
+  exclusively; conversion to local time happens only in the UI layer.

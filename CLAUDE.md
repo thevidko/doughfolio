@@ -79,6 +79,12 @@ Import via path aliases, never deep relative paths: `@client/*`, `@server/*`, `@
    package is genuinely needed, explain the choice in the PR/commit description.
 6. **Never commit secrets** — configuration comes from environment variables;
    document new variables in `.env.example`.
+7. **Money is never a float** — amounts/prices are decimal strings + `decimal.js`
+   (see `docs/PLANNING.md` #9). Plain `number` only for chart rendering at the
+   very edge of the UI.
+8. **No hardcoded UI copy** — every user-facing string goes through the i18n
+   layer (typed translation keys; EN + CS catalogs). This includes server-side
+   error messages, which return translation keys, not prose.
 
 ## Code style
 
@@ -100,7 +106,10 @@ Import via path aliases, never deep relative paths: `@client/*`, `@server/*`, `@
   (`cream`, `dough`, `matcha`, `blush`, `ink`) — never raw Tailwind palette
   colors. The kawaii identity depends on this consistency.
 - Tone of UI copy: friendly and playful (steamer/dumpling metaphors welcome),
-  but never at the cost of clarity — this app handles people's money.
+  but never at the cost of clarity — this app handles people's money. The tone
+  must carry across all languages (EN + CS), not just English.
+- Both light and dark theme are first-class; using semantic tokens (never raw
+  colors) is what keeps them consistent.
 - Accessibility is not optional: meaningful `alt` texts, keyboard navigation,
   sufficient color contrast (the pastel palette makes this easy to get wrong).
 - Charts and money formatting will be added later; when they are, all formatting
