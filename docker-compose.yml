@@ -1,0 +1,15 @@
+# Self-hosting reference setup. Run with: docker compose up -d
+services:
+  doughfolio:
+    image: ghcr.io/thevidko/doughfolio:latest
+    # To run from source instead, comment out `image:` and uncomment:
+    # build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      # All persistent state (SQLite database) — back this volume up.
+      - doughfolio-data:/data
+    restart: unless-stopped
+
+volumes:
+  doughfolio-data:

@@ -23,7 +23,16 @@
 - 🏠 Fully self-hosted — your data never leaves your server
 - 🥟 A delightful, kawaii dumpling-themed UI
 
-## Quick start
+## Self-hosting with Docker
+
+```sh
+docker compose up -d      # uses ghcr.io/thevidko/doughfolio:latest
+```
+
+Your data lives in the `doughfolio-data` volume — back that up. The `:edge` tag
+tracks the development branch if you want to live dangerously. 🥟
+
+## Development quick start
 
 Requires [Bun](https://bun.com) ≥ 1.3.
 
