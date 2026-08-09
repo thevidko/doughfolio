@@ -19,6 +19,8 @@ added only when its feature area is being implemented, not before.
 | `@tanstack/react-query` | FE data fetching | Caching, refetching, and loading/error states for API calls; removes hand-written `useEffect` fetch code (like in `ServerStatus.tsx`). |
 | `@tanstack/react-router` or `react-router` | FE routing | Needed once the app has more than one page (dashboard, transactions, settings). TanStack Router has the better TypeScript story; decide when routing is added. |
 | `lightweight-charts` | Charts | TradingView's canvas chart library — built for financial time series, small, fast. Alternative: Recharts (SVG, easier to style kawaii, weaker with large datasets). |
+| `@fontsource/baloo-2` + `@fontsource/nunito` | Typography | Self-hosted woff2 fonts (no Google CDN — the app never phones home); latin-ext for Czech. See `docs/DESIGN.md`. |
+| `motion` | Animations | Spring/orchestrated animations for the "everything pops" style once CSS transitions stop being enough. See `docs/DESIGN.md`. |
 | `ccxt` | Exchange sync (later) | Unified read-only API for 100+ exchanges, if/when exchange import is added. Heavy dependency — only add when the feature is confirmed. |
 
 Deliberately **not** recommended for now:

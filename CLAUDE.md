@@ -119,9 +119,12 @@ Dependency direction: `client` and `server` may import from `shared`;
 
 - Components must be **small, reusable, and typed** — props via an inline `type`
   or exported from the same file. One exported component per file, named after it.
+- **`docs/DESIGN.md` is the visual rulebook** — hand-drawn crayon aesthetic,
+  typography, textures, motion. Read it before building any UI.
 - Use the **semantic design tokens** from `src/client/styles/globals.css`
   (`cream`, `dough`, `matcha`, `blush`, `ink`) — never raw Tailwind palette
-  colors. The kawaii identity depends on this consistency.
+  colors. The kawaii identity depends on this consistency, and the styling may
+  be wholesale re-themed later — tokens are what make that cheap.
 - Tone of UI copy: friendly and playful (steamer/dumpling metaphors welcome),
   but never at the cost of clarity — this app handles people's money. The tone
   must carry across all languages (EN + CS), not just English.
