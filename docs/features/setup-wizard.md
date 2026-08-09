@@ -1,6 +1,6 @@
 # Feature: First-run setup wizard
 
-- **Status:** approved (owner, 2026-08-09)
+- **Status:** done (implemented 2026-08-09, released in v0.2.0)
 - **Priority:** must-have (first implemented feature)
 - **Depends on:** — (this feature bootstraps the app's foundations: DB layer,
   i18n, routing, sessions. They are built as part of it, each as its own
@@ -95,7 +95,7 @@ wizard must take under a minute. All choices are changeable later in Settings.
 
 ## Data model impact
 
-New tables (initial migration `0001`): `users` (id, display_name,
+New tables (initial migration `0000_init`): `users` (id, display_name,
 password_hash nullable, created_at), `settings` (key, value — language,
 base_currency, setup_completed_at), `wallets` (id, user_id, name, kind,
 created_at), `sessions` (id, user_id, expires_at).
@@ -109,20 +109,20 @@ All under `/api`, shapes in `src/shared/`: `GET /api/setup/status`,
 
 ## Acceptance criteria
 
-- [ ] Fresh instance redirects everything to `/setup`; completed instance
+- [x] Fresh instance redirects everything to `/setup`; completed instance
       never shows it again.
-- [ ] Wizard completable with all steps skipped (pure defaults) — result:
+- [x] Wizard completable with all steps skipped (pure defaults) — result:
       EN/browser language, generic greeting, no password, USD, no wallets.
-- [ ] Language switch in step 1 immediately re-renders the wizard in Czech,
+- [x] Language switch in step 1 immediately re-renders the wizard in Czech,
       including validation messages from the server (translation keys).
-- [ ] Password, when set, is argon2id-hashed; the completing browser receives
+- [x] Password, when set, is argon2id-hashed; the completing browser receives
       a valid session; a second browser is asked to log in.
-- [ ] Created wallets appear in the DB with `kind = 'manual'` and correct
+- [x] Created wallets appear in the DB with `kind = 'manual'` and correct
       owner.
-- [ ] Env-requirements mechanism: a feature with a missing variable reports it
+- [x] Env-requirements mechanism: a feature with a missing variable reports it
       by name; "Check again" unblocks after the variable is provided (covered
       by tests with a fake feature registry).
-- [ ] All new logic covered by tests (migrations run on fresh DB, setup
+- [x] All new logic covered by tests (migrations run on fresh DB, setup
       endpoints, session middleware, env registry).
 
 ## Open questions

@@ -5,10 +5,12 @@ that must be made **before** feature implementation starts. Update the
 **Decision** line of each item once it is settled; implemented decisions should
 eventually be reflected in `CLAUDE.md` and this file trimmed.
 
-## Recommended packages (not yet installed)
+## Recommended packages
 
 Per CLAUDE.md rule "no new dependencies without justification" — each package is
 added only when its feature area is being implemented, not before.
+Installed with the setup wizard (2026-08-09): `zod`, `drizzle-orm` + `drizzle-kit`,
+`i18next` + `react-i18next`, `react-router`, `@fontsource/baloo-2` + `@fontsource/nunito`.
 
 | Package | Area | Why this one |
 | --- | --- | --- |
@@ -17,7 +19,7 @@ added only when its feature area is being implemented, not before.
 | `decimal.js` | Money math | Arbitrary-precision decimal arithmetic — see decision 9; floats are forbidden for amounts. |
 | `i18next` + `react-i18next` | Localization | Typed translation keys, JSON catalogs (EN + CS to start), correct Czech plural rules — see decision 7. |
 | `@tanstack/react-query` | FE data fetching | Caching, refetching, and loading/error states for API calls; removes hand-written `useEffect` fetch code (like in `ServerStatus.tsx`). |
-| `@tanstack/react-router` or `react-router` | FE routing | Needed once the app has more than one page (dashboard, transactions, settings). TanStack Router has the better TypeScript story; decide when routing is added. |
+| `react-router` | FE routing | Chosen with the setup wizard (2026-08-09): library mode is simple and battle-tested, and Bun's bundler needs no extra plugin for it. |
 | `lightweight-charts` | Charts | TradingView's canvas chart library — built for financial time series, small, fast. Alternative: Recharts (SVG, easier to style kawaii, weaker with large datasets). |
 | `@fontsource/baloo-2` + `@fontsource/nunito` | Typography | Self-hosted woff2 fonts (no Google CDN — the app never phones home); latin-ext for Czech. See `docs/DESIGN.md`. |
 | `motion` | Animations | Spring/orchestrated animations for the "everything pops" style once CSS transitions stop being enough. See `docs/DESIGN.md`. |
