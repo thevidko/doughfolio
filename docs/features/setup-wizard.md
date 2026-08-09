@@ -36,14 +36,19 @@ wizard must take under a minute. All choices are changeable later in Settings.
   1. **Welcome + language** — mascot greeting; language preselected from
      browser (`Accept-Language`/`navigator.language`), EN/CS options. Changing
      it re-renders the wizard immediately.
-  2. **Display name** — what the app calls the user ("Welcome back, Vidko!").
+  2. **Display name** — what the app calls the user ("Welcome back, Vidko!"),
+     also shown in Settings. Purely cosmetic — no instance naming.
      Default: skippable → generic greeting.
   3. **Password (optional)** — explicit choice: "protect with password" vs.
      "skip (I secure the instance myself)" with a short honest explanation.
      Hashing via `Bun.password` (argon2id). If set, a session is created for
      the person completing setup (they are not locked out).
-  4. **Base currency** — select from supported fiat list (default: USD;
-     CZK/EUR prominent). Powers all valuations (PLANNING #7).
+  4. **Base currency** — searchable select over the **full CoinGecko
+     `vs_currencies` list** (fiat + BTC/ETH), so no region is locked out;
+     default USD, browser locale may pre-suggest. Powers all valuations
+     (PLANNING #7). Advanced display preferences (multiple currencies,
+     per-wallet overrides) are a separate feature:
+     `multi-currency-display.md`.
   5. **First wallets (optional)** — create one or more wallets with just a
      name; `kind` is `manual` for now (PLANNING #2 source abstraction — the
      full wallet structure is a separate future feature). Skippable.
@@ -122,7 +127,5 @@ All under `/api`, shapes in `src/shared/`: `GET /api/setup/status`,
 
 ## Open questions
 
-- Is "name" the user's display name (assumed here), or should the instance
-  itself also get a name (e.g. shown in the browser tab)?
-- Base currency list for MVP: fixed shortlist (USD, EUR, CZK, GBP, …) or the
-  full CoinGecko `vs_currencies` list?
+_None — resolved 2026-08-09 by the owner: name is the display name (greeting +
+Settings), and the base-currency select uses the full CoinGecko list._
