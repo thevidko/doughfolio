@@ -6,7 +6,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "git config core.hooksPath scripts/git/hooks",
+    "prepare": "[ -d .git ] && git config core.hooksPath scripts/git/hooks || true",
     "dev": "bun --hot src/server/index.ts",
     "start": "NODE_ENV=production bun src/server/index.ts",
     "test": "bun test",

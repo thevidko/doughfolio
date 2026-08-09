@@ -1,6 +1,6 @@
 # Feature: First-run setup wizard
 
-- **Status:** draft
+- **Status:** approved (owner, 2026-08-09)
 - **Priority:** must-have (first implemented feature)
 - **Depends on:** — (this feature bootstraps the app's foundations: DB layer,
   i18n, routing, sessions. They are built as part of it, each as its own
