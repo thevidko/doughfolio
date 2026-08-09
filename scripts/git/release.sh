@@ -25,9 +25,12 @@ fi
 bun run check
 
 # Bump package.json version and commit it on develop.
+# The commit is skipped when the version is unchanged (e.g. re-releasing).
 bun pm pkg set version="$version"
 git add package.json
-git commit -m "chore: release v$version"
+if ! git diff --cached --quiet; then
+  git commit -m "chore: release v$version"
+fi
 
 git checkout main
 if git remote get-url origin >/dev/null 2>&1; then
