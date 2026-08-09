@@ -73,5 +73,10 @@
     "greeting": "Welcome back, {{name}}!",
     "greetingAnonymous": "Welcome back!",
     "empty": "Your portfolio is still steaming — transactions arrive in the next course. 🥟"
+  },
+  "serverStatus": {
+    "checking": "Checking the steamer…",
+    "offline": "Server is offline",
+    "online": "Server is steaming — v{{version}}"
   }
 }

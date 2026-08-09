@@ -73,5 +73,10 @@
     "greeting": "Vítej zpátky, {{name}}!",
     "greetingAnonymous": "Vítej zpátky!",
     "empty": "Portfolio se ještě napařuje — transakce dorazí v dalším chodu. 🥟"
+  },
+  "serverStatus": {
+    "checking": "Kontroluji napařovák…",
+    "offline": "Server je offline",
+    "online": "Server napařuje — v{{version}}"
   }
 }

@@ -1,5 +1,6 @@
 import type { HealthResponse } from "@shared/api.ts";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type Status =
   | { state: "loading" }
@@ -11,6 +12,7 @@ type Status =
  * Demonstrates the end-to-end wiring: shared types → API route → UI.
  */
 export function ServerStatus() {
+  const { t } = useTranslation();
   const [status, setStatus] = useState<Status>({ state: "loading" });
 
   useEffect(() => {
@@ -31,19 +33,22 @@ export function ServerStatus() {
   }, []);
 
   if (status.state === "loading") {
-    return <Badge dotClass="bg-dough animate-pulse" label="Checking the steamer…" />;
+    return <Badge dotClass="bg-dough animate-pulse" label={t("serverStatus.checking")} />;
   }
   if (status.state === "offline") {
-    return <Badge dotClass="bg-blush-dark" label="Server is offline" />;
+    return <Badge dotClass="bg-blush-dark" label={t("serverStatus.offline")} />;
   }
   return (
-    <Badge dotClass="bg-matcha-dark" label={`Server is steaming — v${status.health.version}`} />
+    <Badge
+      dotClass="bg-matcha-dark"
+      label={t("serverStatus.online", { version: status.health.version })}
+    />
   );
 }
 
 function Badge({ dotClass, label }: { dotClass: string; label: string }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-ink-soft shadow-sm">
+    <span className="inline-flex items-center gap-2 rounded-full bg-surface/70 px-4 py-2 text-sm font-semibold text-ink-soft shadow-sm">
       <span className={`size-2.5 rounded-full ${dotClass}`} aria-hidden />
       {label}
     </span>
