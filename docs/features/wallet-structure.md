@@ -1,7 +1,11 @@
 # Feature: Wallet structure (steamers & baskets)
 
-- **Status:** draft
+- **Status:** approved (owner, 2026-08-09) — in progress
 - **Priority:** must-have (prerequisite for manual transactions)
+- **Implementation note:** the `transactions` table ships already in this
+  feature's migration (schema exactly per `manual-transactions.md`) so the
+  wallet-deletion rule is enforceable and tested now; the transactions
+  feature itself adds the API/UI on top without another schema change.
 - **Depends on:** setup-wizard (done)
 
 ## Summary

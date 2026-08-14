@@ -3,6 +3,7 @@ import type { DbConn } from "../db/index.ts";
 import { users, wallets } from "../db/schema.ts";
 import { createSession } from "./sessions.ts";
 import { getSetting, setSetting } from "./settings.ts";
+import { ensureWalletDefaults } from "./wallet-defaults.ts";
 
 export function isSetupCompleted(db: DbConn): boolean {
   return getSetting<string>(db, "setupCompletedAt") !== null;
@@ -52,6 +53,9 @@ export async function completeSetup(
     setSetting(tx, "language", input.language);
     setSetting(tx, "baseCurrency", input.baseCurrency);
     setSetting(tx, "setupCompletedAt", now);
+
+    // Seeds the default group/storage types and homes the wallets just created.
+    ensureWalletDefaults(tx);
 
     if (passwordHash) {
       sessionToken = createSession(tx, userId);
