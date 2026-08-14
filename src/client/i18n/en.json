@@ -47,7 +47,8 @@
     "noStorageType": "No type",
     "confirmDeleteGroup": "Delete steamer \"{{name}}\"? Its wallets will move to the main steamer.",
     "confirmDeleteWallet": "Delete wallet \"{{name}}\"?",
-    "defaultBadge": "main"
+    "defaultBadge": "main",
+    "openTransactions": "Transactions & balance"
   },
   "transactions": {
     "title": "Transactions",

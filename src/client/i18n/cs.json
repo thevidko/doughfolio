@@ -47,7 +47,8 @@
     "noStorageType": "Bez typu",
     "confirmDeleteGroup": "Smazat napařovák „{{name}}“? Jeho peněženky se přesunou do hlavního napařováku.",
     "confirmDeleteWallet": "Smazat peněženku „{{name}}“?",
-    "defaultBadge": "hlavní"
+    "defaultBadge": "hlavní",
+    "openTransactions": "Transakce a zůstatek"
   },
   "transactions": {
     "title": "Transakce",
