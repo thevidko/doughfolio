@@ -38,12 +38,14 @@ export async function ensureDailyPrices(
   const yesterday = utcDay(Date.now() - 86_400_000);
   if (last && last >= yesterday) return;
 
-  // First fill pulls the full history in one request; later fills only the gap.
+  // CoinGecko's public tier serves at most 365 days back and picks daily
+  // granularity automatically for ranges > 90 days (no `interval` param
+  // allowed). Deeper history accretes over time thanks to the forever-cache.
   const gapDays = last
     ? Math.min(365, Math.ceil((Date.now() - Date.parse(last)) / 86_400_000) + 1)
-    : "max";
+    : 365;
   const chart = await coingeckoFetch<MarketChart>(
-    `/coins/${encodeURIComponent(assetId)}/market_chart?vs_currency=${encodeURIComponent(currency)}&days=${gapDays}&interval=daily`,
+    `/coins/${encodeURIComponent(assetId)}/market_chart?vs_currency=${encodeURIComponent(currency)}&days=${gapDays}`,
     fetchImpl,
   );
 

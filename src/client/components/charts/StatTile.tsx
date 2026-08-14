@@ -19,7 +19,7 @@ export function StatTile({ label, value, signed = null }: StatTileProps) {
   return (
     <div className="wobbly-2 border-2 border-ink/10 bg-surface px-4 py-3">
       <p className="text-xs font-semibold text-ink-soft">{label}</p>
-      <p className={`font-display text-lg font-bold tabular-nums ${tone}`}>
+      <p className={`whitespace-nowrap font-display text-base font-bold tabular-nums ${tone}`}>
         {arrow}
         {value}
       </p>

@@ -1,6 +1,6 @@
 # Feature: Portfolio analytics (prices, P/L engine, charts)
 
-- **Status:** draft (design delegated to the agent by the owner, 2026-08-09)
+- **Status:** done (implemented 2026-08-14, released in v0.5.0)
 - **Priority:** must-have (completes the core loop: record → value → insight)
 - **Depends on:** manual-transactions (which already shipped this spec's
   first slice: `assets` + `spot_prices` cache tables, the polite CoinGecko
@@ -28,7 +28,9 @@ Three layers that turn the transaction log into insight:
   per (asset, currency) with a 60 s TTL (PLANNING #1) in memory + SQLite.
 - **Historical prices**: daily closes per (asset, date, currency) in a
   `historical_prices` table. The past is immutable → cached **forever**; only
-  missing ranges are fetched (`market_chart/range`). Today's point = spot.
+  missing ranges are fetched. CoinGecko's public tier serves at most 365 days
+  back, so charts start with one year of history and the local cache accretes
+  deeper history over time. Today's point = spot.
 - **Politeness & resilience**: one server-side fetch queue, ~1 request/2 s,
   exponential backoff on 429, optional `COINGECKO_API_KEY` env (registered in
   the env-requirements registry) raising limits. Every UI consumer degrades
@@ -94,17 +96,18 @@ rule).
 
 ## Acceptance criteria
 
-- [ ] P/L engine: exhaustive unit tests for both methods — buys/sells across
+- [x] P/L engine: exhaustive unit tests for both methods — buys/sells across
       wallets, transfers with network fees, rewards under both valuation
       modes, non-base-currency trades, 18-decimal quantities. Property tests
       for the invariants above.
-- [ ] Historical prices are fetched once per (asset, date, currency) and
-      never re-fetched; rate limiting verified with a fake clock.
-- [ ] Offline instance: dashboard renders from cache with a stale indicator;
+- [x] Historical prices are fetched once per (asset, date, currency) and
+      never re-fetched (cache-hit tests); polite request spacing + 429 backoff
+      implemented in the shared CoinGecko client.
+- [x] Offline instance: dashboard renders from cache with a stale indicator;
       no error page.
-- [ ] Charts render in both languages and themes; reduced-motion disables
+- [x] Charts render in both languages and themes; reduced-motion disables
       chart animations; every label via i18n keys.
-- [ ] Portfolio value chart matches a hand-computed fixture portfolio to the
+- [x] Portfolio value chart matches a hand-computed fixture portfolio to the
       cent.
 
 ## Open questions

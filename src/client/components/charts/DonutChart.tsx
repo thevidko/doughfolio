@@ -58,8 +58,8 @@ export function DonutChart({ title, slices, currency }: DonutChartProps) {
   return (
     <div>
       <h3 className="mb-2 font-display text-sm font-bold text-ink-soft">{title}</h3>
-      <div className="flex items-center gap-4">
-        <svg viewBox="0 0 120 120" className="size-32 shrink-0" role="img" aria-label={title}>
+      <div className="flex flex-col gap-3">
+        <svg viewBox="0 0 120 120" className="size-32 self-center" role="img" aria-label={title}>
           {segments.map((segment) => (
             <path
               key={segment.key}
@@ -71,7 +71,7 @@ export function DonutChart({ title, slices, currency }: DonutChartProps) {
             />
           ))}
         </svg>
-        <ul className="min-w-0 space-y-1 text-sm">
+        <ul className="space-y-1 text-sm">
           {segments.map((segment) => (
             <li key={segment.key} className="flex items-center gap-2">
               <span
@@ -79,8 +79,8 @@ export function DonutChart({ title, slices, currency }: DonutChartProps) {
                 style={{ backgroundColor: segment.color }}
                 aria-hidden
               />
-              <span className="truncate font-semibold uppercase">{segment.label}</span>
-              <span className="ml-auto whitespace-nowrap tabular-nums text-ink-soft">
+              <span className="font-semibold uppercase">{segment.label}</span>
+              <span className="ml-auto whitespace-nowrap pl-2 tabular-nums text-ink-soft">
                 {((segment.value / total) * 100).toFixed(1)} %
               </span>
             </li>
