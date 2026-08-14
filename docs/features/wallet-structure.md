@@ -1,6 +1,6 @@
 # Feature: Wallet structure (steamers & baskets)
 
-- **Status:** approved (owner, 2026-08-09) — in progress
+- **Status:** done (implemented 2026-08-14, released in v0.3.0)
 - **Priority:** must-have (prerequisite for manual transactions)
 - **Implementation note:** the `transactions` table ships already in this
   feature's migration (schema exactly per `manual-transactions.md`) so the
@@ -109,21 +109,21 @@ group move, storage type, sort); `GET/POST /api/storage-types`,
 
 ## Acceptance criteria
 
-- [ ] Fresh install and upgraded instance both end up with a default themed
+- [x] Fresh install and upgraded instance both end up with a default themed
       group containing all existing wallets (migration tested on a database
       created by v0.2.0).
-- [ ] Groups: create/rename/reorder work; deleting a group moves its wallets
+- [x] Groups: create/rename/reorder work; deleting a group moves its wallets
       to the default group; the default group refuses deletion (error envelope
       with i18n key).
-- [ ] Wallets: create with group + storage type, rename, move, reorder;
+- [x] Wallets: create with group + storage type, rename, move, reorder;
       deletion is refused once transactions exist (test with a seeded
       transaction row).
-- [ ] Storage types: seeded hot/cold/staked; user CRUD works; *staked* can be
+- [x] Storage types: seeded hot/cold/staked; user CRUD works; *staked* can be
       renamed but not deleted; deleting a user type clears it from wallets.
-- [ ] `stakingRewardCostBasis` setting persists and defaults to `market`.
-- [ ] Wallets page renders groups/baskets in both languages and both themes;
+- [x] `stakingRewardCostBasis` setting persists and defaults to `market`.
+- [x] Wallets page renders groups/baskets in both languages and both themes;
       all strings via i18n keys.
-- [ ] Full API surface covered by route tests (status + payload shape + error
+- [x] Full API surface covered by route tests (status + payload shape + error
       cases).
 
 ## Open questions

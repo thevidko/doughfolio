@@ -41,3 +41,15 @@ export function postJson<T>(path: string, body: unknown): Promise<T> {
     body: JSON.stringify(body),
   });
 }
+
+export function patchJson<T>(path: string, body: unknown): Promise<T> {
+  return apiFetch<T>(path, {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
+export function deleteJson<T>(path: string): Promise<T> {
+  return apiFetch<T>(path, { method: "DELETE" });
+}
