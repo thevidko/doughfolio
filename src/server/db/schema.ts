@@ -83,6 +83,17 @@ export const assets = sqliteTable("assets", {
   refreshedAt: text("refreshed_at").notNull(),
 });
 
+/** Daily closes — the immutable past, cached forever (portfolio-analytics). */
+export const historicalPrices = sqliteTable("historical_prices", {
+  /** `assetId:currency:date` — one row per day per pair. */
+  id: text("id").primaryKey(),
+  assetId: text("asset_id").notNull(),
+  currency: text("currency").notNull(),
+  /** UTC calendar day, YYYY-MM-DD. */
+  date: text("date").notNull(),
+  price: text("price").notNull(),
+});
+
 export const spotPrices = sqliteTable("spot_prices", {
   /** Composite identity kept simple: one row per asset+currency pair. */
   id: text("id").primaryKey(),
