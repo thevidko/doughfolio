@@ -6,6 +6,7 @@ import { Login } from "./pages/Login.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
 import { Settings } from "./pages/Settings.tsx";
 import { SetupWizard } from "./pages/SetupWizard.tsx";
+import { WalletDetail } from "./pages/WalletDetail.tsx";
 import { Wallets } from "./pages/Wallets.tsx";
 
 /** Root application component. */
@@ -36,6 +37,10 @@ function GatedRoutes() {
       <Route path="/setup" element={completed ? <Navigate to="/" replace /> : <SetupWizard />} />
       <Route path="/" element={completed ? <Dashboard /> : <Navigate to="/setup" replace />} />
       <Route path="/wallets" element={completed ? <Wallets /> : <Navigate to="/setup" replace />} />
+      <Route
+        path="/wallets/:walletId"
+        element={completed ? <WalletDetail /> : <Navigate to="/setup" replace />}
+      />
       <Route
         path="/settings"
         element={completed ? <Settings /> : <Navigate to="/setup" replace />}

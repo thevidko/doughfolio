@@ -41,6 +41,8 @@ export type SetupStatusResponse = {
   language: string | null;
   /** Display name for greetings, null when the user skipped it or pre-setup. */
   displayName: string | null;
+  /** Base currency for valuations (PLANNING #7), null before setup. */
+  baseCurrency: string | null;
 };
 
 /** Response body of `POST /api/setup/complete`. */
@@ -91,3 +93,57 @@ export type WalletDto = {
 export type WalletGroupListResponse = { groups: WalletGroupDto[] };
 export type StorageTypeListResponse = { storageTypes: StorageTypeDto[] };
 export type WalletListResponse = { wallets: WalletDto[] };
+
+/** One row of the transaction log. Amounts are decimal strings (PLANNING #9). */
+export type TransactionDto = {
+  id: string;
+  walletId: string;
+  type: "buy" | "sell" | "transfer_in" | "transfer_out" | "reward";
+  assetId: string;
+  quantity: string;
+  unitPrice: string | null;
+  priceCurrency: string | null;
+  feeQuantity: string | null;
+  feeAssetId: string | null;
+  /** Shared by both rows of a transfer; used for atomic edit/delete. */
+  transferGroupId: string | null;
+  occurredAt: string;
+  note: string | null;
+};
+
+/** `GET /api/wallets/:id/transactions` — rows sorted by occurredAt ascending. */
+export type TransactionListResponse = {
+  transactions: TransactionDto[];
+  /** Running balance of each row's own asset, aligned with `transactions`. */
+  runningBalances: string[];
+};
+
+/** `GET /api/portfolio/balances` — everything the UI needs to show holdings. */
+export type BalancesResponse = {
+  /** walletId → assetId → balance. */
+  wallets: Record<string, Record<string, string>>;
+  /** assetId → total across all wallets. */
+  totals: Record<string, string>;
+  /** assetId → total in staking-behavior wallets. */
+  staked: Record<string, string>;
+  /** "walletId:assetId" pairs whose history dips below zero (UI warning). */
+  overdrawn: string[];
+};
+
+/** One coin from the cached CoinGecko catalog. */
+export type AssetDto = {
+  id: string;
+  symbol: string;
+  name: string;
+};
+
+export type AssetSearchResponse = { assets: AssetDto[] };
+
+/** `GET /api/prices/spot?assets=…&currency=…`. Prices are decimal strings. */
+export type SpotPricesResponse = {
+  currency: string;
+  /** assetId → price; missing entries could not be quoted. */
+  prices: Record<string, string>;
+  /** True when at least one price came from an expired cache (offline). */
+  stale: boolean;
+};

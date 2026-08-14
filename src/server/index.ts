@@ -7,12 +7,16 @@
  */
 import index from "../client/index.html";
 import { openDatabase } from "./db/index.ts";
+import { createAssetRoutes } from "./routes/assets.ts";
 import { createEnvStatusRoute } from "./routes/env-status.ts";
 import { createGroupRoutes } from "./routes/groups.ts";
 import { healthRoute } from "./routes/health.ts";
+import { createPortfolioRoutes } from "./routes/portfolio.ts";
+import { createPriceRoutes } from "./routes/prices.ts";
 import { createSessionRoutes } from "./routes/session.ts";
 import { createSetupRoutes } from "./routes/setup.ts";
 import { createStorageTypeRoutes } from "./routes/storage-types.ts";
+import { createTransactionRoutes } from "./routes/transactions.ts";
 import { createWalletRoutes } from "./routes/wallets.ts";
 import { ensureWalletDefaults } from "./services/wallet-defaults.ts";
 
@@ -28,6 +32,10 @@ const session = createSessionRoutes(db);
 const groups = createGroupRoutes(db);
 const wallets = createWalletRoutes(db);
 const storageTypes = createStorageTypeRoutes(db);
+const txns = createTransactionRoutes(db);
+const assets = createAssetRoutes(db);
+const prices = createPriceRoutes(db);
+const portfolio = createPortfolioRoutes(db);
 
 const server = Bun.serve({
   port: Number(process.env.PORT ?? 3000),
@@ -58,6 +66,15 @@ const server = Bun.serve({
       PATCH: (req) => storageTypes.update(req, req.params.id),
       DELETE: (req) => storageTypes.remove(req, req.params.id),
     },
+    "/api/wallets/:id/transactions": { GET: (req) => txns.listForWallet(req, req.params.id) },
+    "/api/transactions": { POST: (req) => txns.create(req) },
+    "/api/transactions/:id": {
+      PATCH: (req) => txns.update(req, req.params.id),
+      DELETE: (req) => txns.remove(req, req.params.id),
+    },
+    "/api/assets": { GET: (req) => assets.search(req) },
+    "/api/prices/spot": { GET: (req) => prices.spot(req) },
+    "/api/portfolio/balances": { GET: (req) => portfolio.balances(req) },
 
     // Frontend SPA — catch-all must stay last so API routes take precedence.
     "/*": index,

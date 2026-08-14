@@ -34,6 +34,7 @@ describe("GET /api/setup/status", () => {
       authenticated: true,
       language: null,
       displayName: null,
+      baseCurrency: null,
     });
   });
 });

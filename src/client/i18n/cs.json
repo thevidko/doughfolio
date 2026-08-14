@@ -30,6 +30,8 @@
     "envCheckAgain": "Zkontrolovat znovu",
     "unauthorized": "Nejdřív se prosím přihlas.",
     "notFound": "Tahle položka už neexistuje.",
+    "priceApi": "Cenová služba teď neodpovídá — kde to jde, ukazujeme data z cache.",
+    "transferSameWallet": "Převod potřebuje dvě různé peněženky.",
     "defaultGroupUndeletable": "Hlavní napařovák nejde smazat — v něm košíky bydlí.",
     "builtinStorageTypeUndeletable": "Tento typ uložení pohání stakování a nejde smazat (přejmenovat ho můžeš).",
     "walletHasTransactions": "Tahle peněženka má transakce — smazat ji nejde."
@@ -46,6 +48,57 @@
     "confirmDeleteGroup": "Smazat napařovák „{{name}}“? Jeho peněženky se přesunou do hlavního napařováku.",
     "confirmDeleteWallet": "Smazat peněženku „{{name}}“?",
     "defaultBadge": "hlavní"
+  },
+  "transactions": {
+    "title": "Transakce",
+    "add": "Přidat transakci",
+    "types": {
+      "buy": "Nákup",
+      "sell": "Prodej",
+      "transfer": "Převod",
+      "transfer_in": "Převod sem",
+      "transfer_out": "Převod pryč",
+      "reward": "Odměna ze stakování"
+    },
+    "form": {
+      "asset": "Coin",
+      "assetPlaceholder": "Hledat coin (BTC, ethereum…)",
+      "quantity": "Množství",
+      "unitPrice": "Cena za jednotku",
+      "priceCurrency": "Měna ceny",
+      "fromWallet": "Z peněženky",
+      "toWallet": "Do peněženky",
+      "date": "Datum",
+      "note": "Poznámka (volitelné)",
+      "addFee": "+ Přidat poplatek (síť / burza)",
+      "feeQuantity": "Výše poplatku",
+      "feeAsset": "Coin poplatku",
+      "removeFee": "Odebrat poplatek",
+      "submit": "Uložit transakci",
+      "invalidAmount": "Zadej kladné číslo (např. 0,5)."
+    },
+    "table": {
+      "date": "Datum",
+      "type": "Typ",
+      "asset": "Coin",
+      "quantity": "Množství",
+      "price": "Cena",
+      "fee": "Poplatek",
+      "balance": "Zůstatek",
+      "note": "Poznámka"
+    },
+    "empty": "Zatím žádné transakce — zapiš svůj první nákup!",
+    "confirmDelete": "Smazat tuhle transakci? U převodu se smažou obě strany.",
+    "overdrawnWarning": "Některé zůstatky jdou do minusu — prodej nebo převod přesahuje, co bylo k dispozici. Zkontroluj historii.",
+    "staleprices": "Ceny jsou z cache (cenová služba neodpovídá).",
+    "edit": "Upravit"
+  },
+  "holdings": {
+    "title": "Držby",
+    "totalValue": "Celková hodnota",
+    "staked": "nastakováno",
+    "walletValue": "Hodnota peněženky",
+    "noPrices": "Hodnota nedostupná"
   },
   "settings": {
     "title": "Nastavení",

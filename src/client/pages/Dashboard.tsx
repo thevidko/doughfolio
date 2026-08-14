@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { AppHeader } from "../components/AppHeader.tsx";
-import { Mascot } from "../components/Mascot.tsx";
+import { HoldingsOverview } from "../components/HoldingsOverview.tsx";
 import { ServerStatus } from "../components/ServerStatus.tsx";
-import { Card } from "../components/ui/Card.tsx";
 import { useSetupStatus } from "../hooks/useSetupStatus.tsx";
 
 /** Placeholder dashboard — real portfolio views arrive with the next features. */
@@ -22,10 +21,7 @@ export function Dashboard() {
             : t("dashboard.greetingAnonymous")}
         </h1>
 
-        <Card className="animate-pop flex w-full flex-col items-center gap-4 py-10">
-          <Mascot size={110} />
-          <p className="max-w-md text-ink-soft">{t("dashboard.empty")}</p>
-        </Card>
+        <HoldingsOverview baseCurrency={setup?.baseCurrency ?? "usd"} />
 
         <ServerStatus />
       </main>
