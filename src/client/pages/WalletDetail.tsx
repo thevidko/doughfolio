@@ -151,6 +151,7 @@ export function WalletDetail() {
                 wallets={structure.wallets}
                 walletId={walletId}
                 baseCurrency={baseCurrency}
+                defaultAssetId={wallet.defaultAssetId}
                 editing={editing}
                 onSaved={reload}
                 onCancel={() => {

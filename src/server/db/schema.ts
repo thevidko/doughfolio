@@ -65,6 +65,8 @@ export const wallets = sqliteTable("wallets", {
   /** Nullable in SQL only for migration backfill — the app always assigns a group. */
   groupId: text("group_id").references(() => walletGroups.id),
   storageTypeId: text("storage_type_id").references(() => storageTypes.id),
+  /** Optional pinned coin — pre-fills the transaction form (owner request). */
+  defaultAssetId: text("default_asset_id"),
   sortOrder: integer("sort_order").notNull().default(0),
   createdAt: text("created_at").notNull(),
 });

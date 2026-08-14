@@ -16,6 +16,7 @@ function toDto(row: typeof wallets.$inferSelect): WalletDto {
     kind: row.kind,
     groupId: row.groupId,
     storageTypeId: row.storageTypeId,
+    defaultAssetId: row.defaultAssetId,
     sortOrder: row.sortOrder,
   };
 }
@@ -43,7 +44,12 @@ export function listWallets(db: DbConn): WalletDto[] {
 
 export function createWallet(
   db: DbConn,
-  input: { name: string; groupId?: string; storageTypeId?: string | null },
+  input: {
+    name: string;
+    groupId?: string;
+    storageTypeId?: string | null;
+    defaultAssetId?: string | null;
+  },
 ): WalletDto {
   const user = getUser(db);
   if (!user) throw notFound();
@@ -72,6 +78,7 @@ export function createWallet(
       kind: "manual",
       groupId,
       storageTypeId: input.storageTypeId ?? null,
+      defaultAssetId: input.defaultAssetId ?? null,
       sortOrder: maxSort + 1,
       createdAt: new Date().toISOString(),
     })
@@ -87,6 +94,7 @@ export function updateWallet(
     name?: string;
     groupId?: string;
     storageTypeId?: string | null;
+    defaultAssetId?: string | null;
     sortOrder?: number;
   },
 ): WalletDto {

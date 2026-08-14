@@ -29,6 +29,13 @@
       "when": 1786706159102,
       "tag": "0003_historical_prices",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1786721450451,
+      "tag": "0004_wallet_default_asset",
+      "breakpoints": true
     }
   ]
 }
