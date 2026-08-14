@@ -11,6 +11,7 @@ import { createAssetRoutes } from "./routes/assets.ts";
 import { createEnvStatusRoute } from "./routes/env-status.ts";
 import { createGroupRoutes } from "./routes/groups.ts";
 import { healthRoute } from "./routes/health.ts";
+import { createImportExportRoutes } from "./routes/import-export.ts";
 import { createPortfolioRoutes } from "./routes/portfolio.ts";
 import { createPriceRoutes } from "./routes/prices.ts";
 import { createSessionRoutes } from "./routes/session.ts";
@@ -38,6 +39,7 @@ const assets = createAssetRoutes(db);
 const prices = createPriceRoutes(db);
 const portfolio = createPortfolioRoutes(db);
 const settings = createSettingsRoutes(db);
+const importExport = createImportExportRoutes(db);
 
 const server = Bun.serve({
   port: Number(process.env.PORT ?? 3000),
@@ -84,6 +86,9 @@ const server = Bun.serve({
       GET: (req) => portfolio.assetDetail(req, req.params.assetId),
     },
     "/api/settings": { GET: (req) => settings.get(req), PATCH: (req) => settings.update(req) },
+    "/api/export/transactions.csv": { GET: (req) => importExport.exportCsv(req) },
+    "/api/import/preview": { POST: (req) => importExport.preview(req) },
+    "/api/import/commit": { POST: (req) => importExport.commit(req) },
 
     // Frontend SPA — catch-all must stay last so API routes take precedence.
     "/*": index,

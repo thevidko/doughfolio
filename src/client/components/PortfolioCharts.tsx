@@ -70,15 +70,17 @@ export function PortfolioCharts() {
         <StatTile label={t("portfolio.tiles.rewards")} value={money(summary.rewardsValue)} />
       </div>
 
-      {history && history.points.length > 1 && (
-        <Card>
-          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-            <h2 className="text-xl font-bold">{t("portfolio.valueChart")}</h2>
-            <RangeSwitcher value={range} onChange={setRange} />
-          </div>
+      <Card>
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-xl font-bold">{t("portfolio.valueChart")}</h2>
+          <RangeSwitcher value={range} onChange={setRange} />
+        </div>
+        {history && history.points.length > 1 ? (
           <ValueChart points={history.points} currency={currency} />
-        </Card>
-      )}
+        ) : (
+          <p className="text-ink-soft">{t("portfolio.chartNeedsHistory")}</p>
+        )}
+      </Card>
 
       {allocation && (
         <Card>

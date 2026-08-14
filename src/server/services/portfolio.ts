@@ -91,7 +91,12 @@ export async function getPortfolioHistory(
 
   const assetIds = involvedAssets(txs);
   for (const assetId of assetIds) {
-    await ensureDailyPrices(db, assetId, baseCurrency, fetchImpl);
+    try {
+      await ensureDailyPrices(db, assetId, baseCurrency, fetchImpl);
+    } catch {
+      // Degrade per asset: it simply contributes no value to the series.
+      console.warn(`History prices unavailable for ${assetId}`);
+    }
   }
   const priceOf = loadPriceMap(db, assetIds, baseCurrency);
 
