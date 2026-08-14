@@ -196,7 +196,8 @@
       "other": "Ostatní"
     },
     "missingPrices": "Některé ceny se nepodařilo dohledat — P/L může být neúplné.",
-    "empty": "Grafy se probudí s první transakcí."
+    "empty": "Grafy se probudí s první transakcí.",
+    "chartNeedsHistory": "Graf hodnoty se vykreslí, jakmile budou aspoň dva dny dat — nastav transakcím skutečná (zpětná) data, nebo se stav zítra."
   },
   "assetDetail": {
     "back": "Zpět na přehled",

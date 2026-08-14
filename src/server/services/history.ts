@@ -104,13 +104,22 @@ export async function buildPriceIndex(
   const { assetIds, baseCurrency } = input;
   const quotes = [...new Set(input.quoteCurrencies)].filter((c) => c !== baseCurrency);
 
+  // Per-asset degradation: a coin CoinGecko cannot chart must not take the
+  // whole portfolio down — it just ends up in `missingPrices`.
+  const ensure = async (assetId: string, currency: string) => {
+    try {
+      await ensureDailyPrices(db, assetId, currency, fetchImpl);
+    } catch {
+      console.warn(`History prices unavailable for ${assetId} in ${currency}`);
+    }
+  };
   for (const assetId of assetIds) {
-    await ensureDailyPrices(db, assetId, baseCurrency, fetchImpl);
+    await ensure(assetId, baseCurrency);
   }
   if (quotes.length > 0) {
-    await ensureDailyPrices(db, "bitcoin", baseCurrency, fetchImpl);
+    await ensure("bitcoin", baseCurrency);
     for (const currency of quotes) {
-      await ensureDailyPrices(db, "bitcoin", currency, fetchImpl);
+      await ensure("bitcoin", currency);
     }
   }
 

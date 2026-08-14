@@ -196,7 +196,8 @@
       "other": "Other"
     },
     "missingPrices": "Some prices could not be resolved — P/L may be incomplete.",
-    "empty": "Charts wake up with your first transaction."
+    "empty": "Charts wake up with your first transaction.",
+    "chartNeedsHistory": "The value chart appears once there are at least two days of data — backdate your transactions to their real dates, or check back tomorrow."
   },
   "assetDetail": {
     "back": "Back to dashboard",
