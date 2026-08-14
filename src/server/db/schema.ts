@@ -70,6 +70,27 @@ export const wallets = sqliteTable("wallets", {
 });
 
 /**
+ * Price-layer caches (portfolio-analytics spec, first slice). Pure cache —
+ * droppable without data loss; no user_id on purpose.
+ */
+export const assets = sqliteTable("assets", {
+  /** CoinGecko id — the canonical asset identifier (PLANNING #11). */
+  id: text("id").primaryKey(),
+  symbol: text("symbol").notNull(),
+  name: text("name").notNull(),
+  refreshedAt: text("refreshed_at").notNull(),
+});
+
+export const spotPrices = sqliteTable("spot_prices", {
+  /** Composite identity kept simple: one row per asset+currency pair. */
+  id: text("id").primaryKey(),
+  assetId: text("asset_id").notNull(),
+  currency: text("currency").notNull(),
+  price: text("price").notNull(),
+  fetchedAt: text("fetched_at").notNull(),
+});
+
+/**
  * Transaction log — the single source of truth for balances and P/L
  * (manual-transactions spec; schema shipped early so wallet-deletion rules
  * are enforceable). Quantities/prices are decimal strings (PLANNING #9).

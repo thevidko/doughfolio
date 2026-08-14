@@ -15,6 +15,13 @@
       "when": 1786700201604,
       "tag": "0001_wallet_structure",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1786702000624,
+      "tag": "0002_price_cache",
+      "breakpoints": true
     }
   ]
 }
