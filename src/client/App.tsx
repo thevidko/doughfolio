@@ -3,6 +3,7 @@ import { Splash } from "./components/Splash.tsx";
 import { SetupStatusProvider, useSetupStatus } from "./hooks/useSetupStatus.tsx";
 import { AssetDetail } from "./pages/AssetDetail.tsx";
 import { Dashboard } from "./pages/Dashboard.tsx";
+import { Import } from "./pages/Import.tsx";
 import { Login } from "./pages/Login.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
 import { Settings } from "./pages/Settings.tsx";
@@ -46,6 +47,7 @@ function GatedRoutes() {
         path="/assets/:assetId"
         element={completed ? <AssetDetail /> : <Navigate to="/setup" replace />}
       />
+      <Route path="/import" element={completed ? <Import /> : <Navigate to="/setup" replace />} />
       <Route
         path="/settings"
         element={completed ? <Settings /> : <Navigate to="/setup" replace />}

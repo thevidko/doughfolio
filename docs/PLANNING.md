@@ -177,6 +177,8 @@ Deliberately **not** recommended for now:
   transaction import are first-class planned features (post-MVP), and the
   schema/docs must keep them cheap — another reason all state lives in one
   SQLite file.
+- **Implemented (2026-08-14, v0.6.0):** CSV export + import wizard with
+  column/value mapping — see `docs/features/csv-import-export.md`.
 
 ### 16. First-run setup wizard
 - **Decision (2026-08-09):** on first launch the app shows a setup wizard:
