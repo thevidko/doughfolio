@@ -17,7 +17,8 @@
   "nav": {
     "dashboard": "Dashboard",
     "wallets": "Wallets",
-    "settings": "Settings"
+    "settings": "Settings",
+    "menu": "Menu"
   },
   "errors": {
     "validation": "Please check the highlighted fields.",
@@ -48,7 +49,8 @@
     "confirmDeleteGroup": "Delete steamer \"{{name}}\"? Its wallets will move to the main steamer.",
     "confirmDeleteWallet": "Delete wallet \"{{name}}\"?",
     "defaultBadge": "main",
-    "openTransactions": "Transactions & balance"
+    "openTransactions": "Transactions & balance",
+    "editWallet": "Wallet settings"
   },
   "transactions": {
     "title": "Transactions",
@@ -284,5 +286,21 @@
     "pickWallet": "Wallet…",
     "import": "Import CSV",
     "manageWallets": "Manage wallets"
+  },
+  "stats": {
+    "title": "Overview",
+    "totalValue": "Total value",
+    "invested": "Total invested",
+    "investedHint": "Money you put in: buys minus sale proceeds",
+    "change24h": "24h change",
+    "change24hHint": "Value change versus yesterday's close",
+    "unrealized": "Unrealized P/L",
+    "unrealizedHint": "Paper profit of coins you still hold (value − cost)",
+    "realized": "Realized P/L",
+    "realizedHint": "Locked-in profit from coins you already sold",
+    "feesPaid": "Fees paid",
+    "feesPaidHint": "All trading and network fees, valued at market",
+    "rewards": "Staking rewards",
+    "rewardsHint": "Market value of rewards at the time you received them"
   }
 }

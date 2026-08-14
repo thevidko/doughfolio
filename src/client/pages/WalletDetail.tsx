@@ -8,7 +8,7 @@ import { Decimal, formatCurrency, formatQuantity } from "@shared/money.ts";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams, useSearchParams } from "react-router";
-import { AppHeader } from "../components/AppHeader.tsx";
+import { AppShell } from "../components/AppShell.tsx";
 import { Splash } from "../components/Splash.tsx";
 import { TransactionForm } from "../components/transactions/TransactionForm.tsx";
 import { TransactionsTable } from "../components/transactions/TransactionsTable.tsx";
@@ -74,8 +74,7 @@ export function WalletDetail() {
   const hasOverdraw = balances.overdrawn.some((pair) => pair.startsWith(`${walletId}:`));
 
   return (
-    <div className="min-h-dvh">
-      <AppHeader />
+    <AppShell>
       <main className="mx-auto max-w-5xl space-y-6 p-6">
         <div className="flex flex-wrap items-center gap-3">
           <Link
@@ -180,6 +179,6 @@ export function WalletDetail() {
           </div>
         </Card>
       </main>
-    </div>
+    </AppShell>
   );
 }

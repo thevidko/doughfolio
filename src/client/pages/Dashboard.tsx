@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { AppHeader } from "../components/AppHeader.tsx";
+import { AppShell } from "../components/AppShell.tsx";
 import { HoldingsOverview } from "../components/HoldingsOverview.tsx";
 import { PortfolioCharts } from "../components/PortfolioCharts.tsx";
 import { QuickActions } from "../components/QuickActions.tsx";
@@ -13,9 +13,7 @@ export function Dashboard() {
   const setup = status.phase === "ready" ? status.status : null;
 
   return (
-    <div className="min-h-dvh">
-      <AppHeader />
-
+    <AppShell>
       <main className="mx-auto flex max-w-6xl flex-col items-center gap-8 p-6 text-center">
         <h1 className="animate-pop text-3xl font-bold">
           {setup?.displayName
@@ -31,6 +29,6 @@ export function Dashboard() {
 
         <ServerStatus />
       </main>
-    </div>
+    </AppShell>
   );
 }
