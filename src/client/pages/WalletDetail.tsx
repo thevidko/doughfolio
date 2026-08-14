@@ -7,7 +7,7 @@ import type {
 import { Decimal, formatCurrency, formatQuantity } from "@shared/money.ts";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useSearchParams } from "react-router";
 import { AppHeader } from "../components/AppHeader.tsx";
 import { Splash } from "../components/Splash.tsx";
 import { TransactionForm } from "../components/transactions/TransactionForm.tsx";
@@ -22,6 +22,7 @@ import { apiFetch, deleteJson } from "../lib/api.ts";
 export function WalletDetail() {
   const { t, i18n } = useTranslation();
   const { walletId = "" } = useParams();
+  const [searchParams] = useSearchParams();
   const setup = useSetupStatus();
   const baseCurrency = (setup.phase === "ready" ? setup.status.baseCurrency : null) ?? "usd";
 
@@ -29,7 +30,7 @@ export function WalletDetail() {
   const [list, setList] = useState<TransactionListResponse | null>(null);
   const [balances, setBalances] = useState<BalancesResponse | null>(null);
   const [prices, setPrices] = useState<SpotPricesResponse | null>(null);
-  const [adding, setAdding] = useState(false);
+  const [adding, setAdding] = useState(searchParams.get("add") === "1");
   const [editing, setEditing] = useState<TransactionDto | null>(null);
 
   const reload = useCallback(async () => {

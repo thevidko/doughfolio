@@ -168,7 +168,8 @@ export type PortfolioSummaryResponse = {
 /** `GET /api/portfolio/history?days=…` — chart series (numbers at the edge). */
 export type PortfolioHistoryResponse = {
   baseCurrency: string;
-  points: { date: string; value: number }[];
+  /** `invested` = cumulative net deposits (buys − sell proceeds) in base. */
+  points: { date: string; value: number; invested: number }[];
 };
 
 export type AllocationSlice = { key: string; label: string; value: number };

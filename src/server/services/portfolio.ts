@@ -10,7 +10,7 @@ import { computePl, type PlMethod, type RewardBasis } from "@shared/pl.ts";
 import type { DbConn } from "../db/index.ts";
 import { storageTypes, walletGroups, wallets } from "../db/schema.ts";
 import type { Fetcher } from "../lib/coingecko.ts";
-import { buildPriceIndex, ensureDailyPrices, loadPriceMap, utcDay } from "./history.ts";
+import { buildPriceIndex, loadPriceMap, utcDay } from "./history.ts";
 import { getSpotPrices } from "./prices.ts";
 import { getSetting } from "./settings.ts";
 import { listAllTransactions } from "./transactions.ts";
@@ -90,18 +90,18 @@ export async function getPortfolioHistory(
   if (txs.length === 0) return { baseCurrency, points: [] };
 
   const assetIds = involvedAssets(txs);
-  for (const assetId of assetIds) {
-    try {
-      await ensureDailyPrices(db, assetId, baseCurrency, fetchImpl);
-    } catch {
-      // Degrade per asset: it simply contributes no value to the series.
-      console.warn(`History prices unavailable for ${assetId}`);
-    }
-  }
-  const priceOf = loadPriceMap(db, assetIds, baseCurrency);
+  const quoteCurrencies = [
+    ...new Set(txs.map((t) => t.priceCurrency).filter((c): c is string => Boolean(c))),
+  ];
+  // buildPriceIndex degrades per asset and also provides fx for the invested
+  // line (trades in non-base currencies convert at the day's rate).
+  const prices = await buildPriceIndex(db, { assetIds, quoteCurrencies, baseCurrency }, fetchImpl);
+  const priceOf = prices.assetPrice;
 
-  // Per-day quantity deltas per asset (fees included), then one forward walk.
+  // Per-day quantity deltas per asset (fees included) and per-day invested
+  // deltas (buy cost − sell proceeds), then one forward walk.
   const deltas = new Map<string, Map<string, Decimal>>();
+  const investedDeltas = new Map<string, Decimal>();
   const bump = (date: string, assetId: string, delta: Decimal) => {
     let forDay = deltas.get(date);
     if (!forDay) {
@@ -118,6 +118,18 @@ export async function getPortfolioHistory(
     if (tx.feeQuantity && tx.feeAssetId) {
       bump(date, tx.feeAssetId, new Decimal(tx.feeQuantity).negated());
     }
+    if ((tx.type === "buy" || tx.type === "sell") && tx.unitPrice && tx.priceCurrency) {
+      const fx = prices.fxToBase(tx.priceCurrency, date);
+      if (fx) {
+        const traded = qty.times(tx.unitPrice).times(fx);
+        investedDeltas.set(
+          date,
+          (investedDeltas.get(date) ?? new Decimal(0)).plus(
+            tx.type === "buy" ? traded : traded.negated(),
+          ),
+        );
+      }
+    }
   }
 
   const firstDay = utcDay((txs[0] as (typeof txs)[number]).occurredAt);
@@ -125,7 +137,8 @@ export async function getPortfolioHistory(
   const today = utcDay(Date.now());
 
   const holdings = new Map<string, Decimal>();
-  const points: { date: string; value: number }[] = [];
+  let invested = new Decimal(0);
+  const points: { date: string; value: number; invested: number }[] = [];
   for (let ms = Date.parse(firstDay); ms <= Date.parse(today); ms += DAY_MS) {
     const date = utcDay(ms);
     const forDay = deltas.get(date);
@@ -134,6 +147,7 @@ export async function getPortfolioHistory(
         holdings.set(assetId, (holdings.get(assetId) ?? new Decimal(0)).plus(delta));
       }
     }
+    invested = invested.plus(investedDeltas.get(date) ?? 0);
     if (date < startDay) continue;
 
     let value = new Decimal(0);
@@ -143,7 +157,11 @@ export async function getPortfolioHistory(
       if (price) value = value.plus(qty.times(price));
     }
     // Chart edge — numbers are allowed here (PLANNING #9).
-    points.push({ date, value: Number(value.toFixed(2)) });
+    points.push({
+      date,
+      value: Number(value.toFixed(2)),
+      invested: Number(invested.toFixed(2)),
+    });
   }
 
   return { baseCurrency, points };
