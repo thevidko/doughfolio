@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
-import { AppHeader } from "../components/AppHeader.tsx";
+import { AppShell } from "../components/AppShell.tsx";
 import { Splash } from "../components/Splash.tsx";
 import { Button } from "../components/ui/Button.tsx";
 import { GroupSection } from "../components/wallets/GroupSection.tsx";
@@ -34,8 +34,7 @@ export function Wallets() {
   }
 
   return (
-    <div className="min-h-dvh">
-      <AppHeader />
+    <AppShell>
       <main className="mx-auto max-w-5xl space-y-10 p-6">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
@@ -87,6 +86,6 @@ export function Wallets() {
           <Button onClick={() => setAddingGroup(true)}>+ {t("wallets.addGroup")}</Button>
         )}
       </main>
-    </div>
+    </AppShell>
   );
 }

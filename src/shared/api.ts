@@ -153,6 +153,8 @@ export type PortfolioSummaryResponse = {
   baseCurrency: string;
   costBasisMethod: "average" | "fifo";
   totalValue: string;
+  /** Cumulative net deposits: buy costs − sell proceeds, in base currency. */
+  invested: string;
   costBasis: string;
   unrealized: string;
   realized: string;

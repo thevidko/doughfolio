@@ -4,7 +4,7 @@ import { createChart, createSeriesMarkers, LineSeries } from "lightweight-charts
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router";
-import { AppHeader } from "../components/AppHeader.tsx";
+import { AppShell } from "../components/AppShell.tsx";
 import { chartTheme } from "../components/charts/chartTheme.ts";
 import { type Range, RangeSwitcher } from "../components/charts/RangeSwitcher.tsx";
 import { StatTile } from "../components/charts/StatTile.tsx";
@@ -81,8 +81,7 @@ export function AssetDetail() {
   const money = (value: string) => formatCurrency(value, detail.baseCurrency, i18n.language);
 
   return (
-    <div className="min-h-dvh">
-      <AppHeader />
+    <AppShell>
       <main className="mx-auto max-w-5xl space-y-6 p-6">
         <div className="flex items-center gap-3">
           <Link to="/" className="text-ink-soft hover:text-ink" aria-label={t("assetDetail.back")}>
@@ -117,6 +116,6 @@ export function AssetDetail() {
           <div ref={chartRef} className="h-75 w-full" />
         </Card>
       </main>
-    </div>
+    </AppShell>
   );
 }

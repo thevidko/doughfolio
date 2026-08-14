@@ -4,7 +4,7 @@ import type { ImportMapping } from "@shared/schemas/import.ts";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
-import { AppHeader } from "../components/AppHeader.tsx";
+import { AppShell } from "../components/AppShell.tsx";
 import { Splash } from "../components/Splash.tsx";
 import { AssetPicker } from "../components/transactions/AssetPicker.tsx";
 import { Button } from "../components/ui/Button.tsx";
@@ -153,8 +153,7 @@ export function Import() {
 
   if (result) {
     return (
-      <div className="min-h-dvh">
-        <AppHeader />
+      <AppShell>
         <main className="mx-auto max-w-3xl space-y-6 p-6">
           <Card className="animate-pop space-y-4 text-center">
             <h1 className="text-3xl font-bold">{t("import.doneTitle")}</h1>
@@ -186,13 +185,12 @@ export function Import() {
             </Link>
           </Card>
         </main>
-      </div>
+      </AppShell>
     );
   }
 
   return (
-    <div className="min-h-dvh">
-      <AppHeader />
+    <AppShell>
       <main className="mx-auto max-w-4xl space-y-6 p-6">
         <div>
           <h1 className="text-3xl font-bold">{t("import.title")}</h1>
@@ -412,6 +410,6 @@ export function Import() {
           </>
         )}
       </main>
-    </div>
+    </AppShell>
   );
 }

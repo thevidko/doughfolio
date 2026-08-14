@@ -64,10 +64,21 @@ export async function getPortfolioSummary(
     else missingYesterday = true;
   }
 
+  // Net deposits — what the user actually put in (buys − sell proceeds).
+  let invested = new Decimal(0);
+  for (const tx of txs) {
+    if ((tx.type !== "buy" && tx.type !== "sell") || !tx.unitPrice || !tx.priceCurrency) continue;
+    const fx = prices.fxToBase(tx.priceCurrency, utcDay(tx.occurredAt));
+    if (!fx) continue;
+    const traded = new Decimal(tx.quantity).times(tx.unitPrice).times(fx);
+    invested = tx.type === "buy" ? invested.plus(traded) : invested.minus(traded);
+  }
+
   return {
     baseCurrency,
     costBasisMethod: method,
     totalValue: totalValue.toString(),
+    invested: invested.toString(),
     costBasis: pl.totals.costBasis,
     unrealized: totalValue.minus(pl.totals.costBasis).toString(),
     realized: pl.totals.realized,

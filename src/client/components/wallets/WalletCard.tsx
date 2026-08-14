@@ -16,7 +16,10 @@ type WalletCardProps = {
   onError: (error: unknown) => void;
 };
 
-/** One "basket": rename, storage type, group move, reorder, delete. */
+/**
+ * One "basket", kept calm on purpose (owner feedback): name + storage chip +
+ * the transactions button. All management lives behind the ⚙️ toggle.
+ */
 export function WalletCard({
   wallet,
   groups,
@@ -26,7 +29,9 @@ export function WalletCard({
   onError,
 }: WalletCardProps) {
   const { t } = useTranslation();
+  const [editing, setEditing] = useState(false);
   const [renaming, setRenaming] = useState(false);
+  const storageType = storageTypes.find((s) => s.id === wallet.storageTypeId);
 
   async function mutate(action: () => Promise<unknown>) {
     try {
@@ -51,28 +56,93 @@ export function WalletCard({
 
   return (
     <div className="wobbly-2 animate-pop border-2 border-ink/15 bg-surface p-4 shadow-sm">
-      <div className="flex items-center justify-between gap-2">
-        {renaming ? (
-          <InlineNameForm
-            placeholder={t("wallets.walletNamePlaceholder")}
-            initial={wallet.name}
-            submitLabel={t("common.save")}
-            onSubmit={async (name) => {
-              await mutate(() => patchJson(`/api/wallets/${wallet.id}`, { name }));
-              setRenaming(false);
-            }}
-            onCancel={() => setRenaming(false)}
-          />
-        ) : (
-          <Link
-            to={`/wallets/${wallet.id}`}
-            className="font-display text-lg font-bold underline-offset-4 hover:underline"
-          >
-            {wallet.name}
-          </Link>
-        )}
-        {!renaming && (
-          <div className="flex items-center gap-1">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          {renaming ? (
+            <InlineNameForm
+              placeholder={t("wallets.walletNamePlaceholder")}
+              initial={wallet.name}
+              submitLabel={t("common.save")}
+              onSubmit={async (name) => {
+                await mutate(() => patchJson(`/api/wallets/${wallet.id}`, { name }));
+                setRenaming(false);
+              }}
+              onCancel={() => setRenaming(false)}
+            />
+          ) : (
+            <>
+              <Link
+                to={`/wallets/${wallet.id}`}
+                className="font-display text-lg font-bold underline-offset-4 hover:underline"
+              >
+                {wallet.name}
+              </Link>
+              {storageType && (
+                <span className="ml-2 inline-block whitespace-nowrap rounded-full bg-cream-dark px-2 py-0.5 align-middle text-xs font-semibold text-ink-soft">
+                  {storageType.name}
+                </span>
+              )}
+            </>
+          )}
+        </div>
+        <button
+          type="button"
+          aria-label={t("wallets.editWallet")}
+          aria-expanded={editing}
+          onClick={() => setEditing((v) => !v)}
+          className={`px-1 text-lg transition-transform hover:rotate-45 ${editing ? "rotate-45" : ""}`}
+        >
+          ⚙️
+        </button>
+      </div>
+
+      <Link
+        to={`/wallets/${wallet.id}`}
+        className="wobbly mt-3 inline-flex items-center gap-2 border-2 border-ink bg-dough px-4 py-1.5 font-display text-sm font-semibold text-ink transition-transform hover:-rotate-1 active:scale-95"
+      >
+        📒 {t("wallets.openTransactions")}
+      </Link>
+
+      {editing && (
+        <div className="animate-pop mt-3 space-y-2 border-ink/10 border-t pt-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <select
+              className={selectClass}
+              value={wallet.storageTypeId ?? ""}
+              aria-label={t("settings.storageTypes")}
+              onChange={(e) =>
+                void mutate(() =>
+                  patchJson(`/api/wallets/${wallet.id}`, {
+                    storageTypeId: e.target.value || null,
+                  }),
+                )
+              }
+            >
+              <option value="">{t("wallets.noStorageType")}</option>
+              {storageTypes.map((type) => (
+                <option key={type.id} value={type.id}>
+                  {type.name}
+                </option>
+              ))}
+            </select>
+            <select
+              className={selectClass}
+              value={wallet.groupId}
+              aria-label={t("wallets.title")}
+              onChange={(e) =>
+                void mutate(() =>
+                  patchJson(`/api/wallets/${wallet.id}`, { groupId: e.target.value }),
+                )
+              }
+            >
+              {groups.map((group) => (
+                <option key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-wrap items-center gap-1">
             <Button
               variant="ghost"
               onClick={() => swapWith(neighbors.prev)}
@@ -104,52 +174,8 @@ export function WalletCard({
               ✕
             </Button>
           </div>
-        )}
-      </div>
-
-      <div className="mt-3 flex flex-wrap items-center gap-2">
-        <select
-          className={selectClass}
-          value={wallet.storageTypeId ?? ""}
-          aria-label={t("settings.storageTypes")}
-          onChange={(e) =>
-            void mutate(() =>
-              patchJson(`/api/wallets/${wallet.id}`, {
-                storageTypeId: e.target.value || null,
-              }),
-            )
-          }
-        >
-          <option value="">{t("wallets.noStorageType")}</option>
-          {storageTypes.map((type) => (
-            <option key={type.id} value={type.id}>
-              {type.name}
-            </option>
-          ))}
-        </select>
-
-        <select
-          className={selectClass}
-          value={wallet.groupId}
-          aria-label={t("wallets.title")}
-          onChange={(e) =>
-            void mutate(() => patchJson(`/api/wallets/${wallet.id}`, { groupId: e.target.value }))
-          }
-        >
-          {groups.map((group) => (
-            <option key={group.id} value={group.id}>
-              {group.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <Link
-        to={`/wallets/${wallet.id}`}
-        className="wobbly mt-3 inline-flex items-center gap-2 border-2 border-ink bg-dough px-4 py-1.5 font-display font-semibold text-ink transition-transform hover:-rotate-1 active:scale-95"
-      >
-        📒 {t("wallets.openTransactions")}
-      </Link>
+        </div>
+      )}
     </div>
   );
 }
