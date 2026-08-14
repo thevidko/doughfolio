@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "6ca7cda2-ee62-4c98-b50c-5c5f03b8aafc",
+  "id": "23861a0c-28f0-4c0a-9ed2-8967b5e860b2",
   "prevId": "7771edd2-e87a-45a7-bca3-c32a54e75c5d",
   "tables": {
     "assets": {
@@ -26,6 +26,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true,
+          "autoincrement": false
+        },
+        "market_cap_rank": {
+          "name": "market_cap_rank",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "refreshed_at": {

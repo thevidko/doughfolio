@@ -2,6 +2,7 @@ CREATE TABLE `assets` (
 	`id` text PRIMARY KEY NOT NULL,
 	`symbol` text NOT NULL,
 	`name` text NOT NULL,
+	`market_cap_rank` integer,
 	`refreshed_at` text NOT NULL
 );
 --> statement-breakpoint

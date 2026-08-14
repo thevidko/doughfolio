@@ -41,6 +41,8 @@ export type SetupStatusResponse = {
   language: string | null;
   /** Display name for greetings, null when the user skipped it or pre-setup. */
   displayName: string | null;
+  /** Base currency for valuations (PLANNING #7), null before setup. */
+  baseCurrency: string | null;
 };
 
 /** Response body of `POST /api/setup/complete`. */

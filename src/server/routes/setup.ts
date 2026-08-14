@@ -27,6 +27,7 @@ export function createSetupRoutes(db: Db) {
       language: getSetting<string>(db, "language"),
       // The display name is only revealed to authenticated visitors.
       displayName: authenticated ? (user?.displayName ?? null) : null,
+      baseCurrency: getSetting<string>(db, "baseCurrency"),
     };
     return Response.json(body);
   }

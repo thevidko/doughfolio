@@ -1,6 +1,7 @@
 import type { StorageTypeDto, WalletDto, WalletGroupDto } from "@shared/api.ts";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { deleteJson, patchJson } from "../../lib/api.ts";
 import { Button } from "../ui/Button.tsx";
 import { InlineNameForm } from "./InlineNameForm.tsx";
@@ -63,7 +64,12 @@ export function WalletCard({
             onCancel={() => setRenaming(false)}
           />
         ) : (
-          <span className="font-display text-lg font-bold">{wallet.name}</span>
+          <Link
+            to={`/wallets/${wallet.id}`}
+            className="font-display text-lg font-bold underline-offset-4 hover:underline"
+          >
+            {wallet.name}
+          </Link>
         )}
         {!renaming && (
           <div className="flex items-center gap-1">

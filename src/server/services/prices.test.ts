@@ -22,25 +22,38 @@ const failingFetcher: Fetcher = async () => new Response("nope", { status: 500 }
 
 describe("searchAssets", () => {
   const COINS = [
+    { id: "batcat", symbol: "btc", name: "batcat" },
     { id: "bitcoin", symbol: "btc", name: "Bitcoin" },
     { id: "bitcoin-cash", symbol: "bch", name: "Bitcoin Cash" },
     { id: "batcoin", symbol: "bat", name: "Batcoin" },
   ];
+  const MARKETS = [{ id: "bitcoin", market_cap_rank: 1 }];
 
-  it("fetches the catalog once and ranks exact ticker matches first", async () => {
+  /** URL-aware fake: /coins/list vs /coins/markets. */
+  const catalogFetcher =
+    (calls?: { count: number }): Fetcher =>
+    async (url) => {
+      if (calls) calls.count += 1;
+      const payload = url.includes("/coins/markets") ? MARKETS : COINS;
+      return new Response(JSON.stringify(payload), { status: 200 });
+    };
+
+  it("caches the catalog and ranks exact tickers by market cap", async () => {
     const db = freshDb();
     const calls = { count: 0 };
-    const results = await searchAssets(db, "btc", jsonFetcher(COINS, calls));
+    const results = await searchAssets(db, "btc", catalogFetcher(calls));
+    // Both "batcat" and "bitcoin" have the ticker btc — market cap wins.
     expect(results[0]?.id).toBe("bitcoin");
+    expect(calls.count).toBe(2);
 
-    // Second search hits the cache — no second fetch.
-    await searchAssets(db, "bitcoin", jsonFetcher(COINS, calls));
-    expect(calls.count).toBe(1);
+    // Second search hits the cache — no further fetches.
+    await searchAssets(db, "bitcoin", catalogFetcher(calls));
+    expect(calls.count).toBe(2);
   });
 
   it("serves the cached catalog when the refresh fails", async () => {
     const db = freshDb();
-    await searchAssets(db, "btc", jsonFetcher(COINS));
+    await searchAssets(db, "btc", catalogFetcher());
     const results = await searchAssets(db, "bitcoin cash", failingFetcher);
     expect(results.map((a) => a.id)).toContain("bitcoin-cash");
   });

@@ -78,6 +78,8 @@ export const assets = sqliteTable("assets", {
   id: text("id").primaryKey(),
   symbol: text("symbol").notNull(),
   name: text("name").notNull(),
+  /** Market-cap position for search ranking (top coins only); null = long tail. */
+  marketCapRank: integer("market_cap_rank"),
   refreshedAt: text("refreshed_at").notNull(),
 });
 

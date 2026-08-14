@@ -2,7 +2,9 @@
 
 - **Status:** draft (design delegated to the agent by the owner, 2026-08-09)
 - **Priority:** must-have (completes the core loop: record → value → insight)
-- **Depends on:** manual-transactions
+- **Depends on:** manual-transactions (which already shipped this spec's
+  first slice: `assets` + `spot_prices` cache tables, the polite CoinGecko
+  client, asset search with market-cap ranking, and spot prices)
 
 ## Summary
 
