@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { deleteJson, patchJson } from "../../lib/api.ts";
+import { AssetPicker } from "../transactions/AssetPicker.tsx";
 import { Button } from "../ui/Button.tsx";
 import { InlineNameForm } from "./InlineNameForm.tsx";
 
@@ -82,6 +83,11 @@ export function WalletCard({
                   {storageType.name}
                 </span>
               )}
+              {wallet.defaultAssetId && (
+                <span className="ml-2 inline-block whitespace-nowrap rounded-full bg-dough/30 px-2 py-0.5 align-middle text-xs font-semibold text-dough-dark uppercase">
+                  🪙 {wallet.defaultAssetId}
+                </span>
+              )}
             </>
           )}
         </div>
@@ -141,6 +147,24 @@ export function WalletCard({
                 </option>
               ))}
             </select>
+          </div>
+          <div>
+            <span className="mb-1 block text-xs font-semibold text-ink-soft">
+              {t("wallets.defaultAsset")} · {t("wallets.defaultAssetHint")}
+            </span>
+            <AssetPicker
+              value={
+                wallet.defaultAssetId
+                  ? { id: wallet.defaultAssetId, symbol: wallet.defaultAssetId, name: "" }
+                  : null
+              }
+              onChange={(asset) =>
+                void mutate(() =>
+                  patchJson(`/api/wallets/${wallet.id}`, { defaultAssetId: asset?.id ?? null }),
+                )
+              }
+              placeholder={t("transactions.form.assetPlaceholder")}
+            />
           </div>
           <div className="flex flex-wrap items-center gap-1">
             <Button

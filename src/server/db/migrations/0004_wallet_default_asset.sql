@@ -1,0 +1,1 @@
+ALTER TABLE `wallets` ADD `default_asset_id` text;

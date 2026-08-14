@@ -14,11 +14,13 @@ export const createWalletSchema = z.object({
   name,
   groupId: z.string().optional(),
   storageTypeId: z.string().nullable().optional(),
+  defaultAssetId: z.string().trim().min(1).max(100).nullable().optional(),
 });
 export const patchWalletSchema = z.object({
   name: name.optional(),
   groupId: z.string().optional(),
   storageTypeId: z.string().nullable().optional(),
+  defaultAssetId: z.string().trim().min(1).max(100).nullable().optional(),
   sortOrder: z.number().int().min(0).optional(),
 });
 

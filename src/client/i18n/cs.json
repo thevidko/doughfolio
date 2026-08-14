@@ -50,7 +50,9 @@
     "confirmDeleteWallet": "Smazat peněženku „{{name}}“?",
     "defaultBadge": "hlavní",
     "openTransactions": "Transakce a zůstatek",
-    "editWallet": "Nastavení peněženky"
+    "editWallet": "Nastavení peněženky",
+    "defaultAsset": "Výchozí coin",
+    "defaultAssetHint": "Předvyplní se u nových transakcí v této peněžence"
   },
   "transactions": {
     "title": "Transakce",

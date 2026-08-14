@@ -138,6 +138,21 @@ describe("/api/wallets", () => {
   });
 });
 
+describe("wallet default asset", () => {
+  it("stores, returns and clears the pinned coin", async () => {
+    const { wallets } = await instance();
+    const { wallet } = await (
+      await wallets.create(jsonReq({ name: "ETH stack", defaultAssetId: "ethereum" }))
+    ).json();
+    expect(wallet.defaultAssetId).toBe("ethereum");
+
+    const cleared = await (
+      await wallets.update(jsonReq({ defaultAssetId: null }, "PATCH"), wallet.id)
+    ).json();
+    expect(cleared.wallet.defaultAssetId).toBeNull();
+  });
+});
+
 describe("/api/storage-types", () => {
   it("seeds hot/cold/staked and supports user CRUD", async () => {
     const { storageTypes } = await instance();

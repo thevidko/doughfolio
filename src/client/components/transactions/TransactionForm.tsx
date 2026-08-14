@@ -15,6 +15,8 @@ type TransactionFormProps = {
   wallets: WalletDto[];
   walletId: string;
   baseCurrency: string;
+  /** Wallet's pinned coin — pre-fills the picker for new transactions. */
+  defaultAssetId?: string | null;
   /** When set, the form edits this transaction instead of creating one. */
   editing?: TransactionDto | null;
   onSaved: () => Promise<void>;
@@ -33,6 +35,7 @@ export function TransactionForm({
   wallets,
   walletId,
   baseCurrency,
+  defaultAssetId = null,
   editing = null,
   onSaved,
   onCancel,
@@ -45,9 +48,11 @@ export function TransactionForm({
     : null;
 
   const [type, setType] = useState<FormType>(editingType ?? "buy");
-  const [asset, setAsset] = useState<AssetDto | null>(
-    editing ? { id: editing.assetId, symbol: editing.assetId, name: "" } : null,
-  );
+  const [asset, setAsset] = useState<AssetDto | null>(() => {
+    if (editing) return { id: editing.assetId, symbol: editing.assetId, name: "" };
+    if (defaultAssetId) return { id: defaultAssetId, symbol: defaultAssetId, name: "" };
+    return null;
+  });
   const [quantity, setQuantity] = useState(editing?.quantity ?? "");
   const [unitPrice, setUnitPrice] = useState(editing?.unitPrice ?? "");
   const [priceCurrency, setPriceCurrency] = useState(editing?.priceCurrency ?? baseCurrency);

@@ -87,6 +87,8 @@ export type WalletDto = {
   kind: "manual" | "wallet" | "exchange";
   groupId: string;
   storageTypeId: string | null;
+  /** Optional pinned coin (CoinGecko id) that pre-fills the transaction form. */
+  defaultAssetId: string | null;
   sortOrder: number;
 };
 
