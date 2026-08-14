@@ -197,7 +197,11 @@
     },
     "missingPrices": "Some prices could not be resolved — P/L may be incomplete.",
     "empty": "Charts wake up with your first transaction.",
-    "chartNeedsHistory": "The value chart appears once there are at least two days of data — backdate your transactions to their real dates, or check back tomorrow."
+    "chartNeedsHistory": "The value chart appears once there are at least two days of data — backdate your transactions to their real dates, or check back tomorrow.",
+    "series": {
+      "value": "Portfolio value",
+      "invested": "Invested"
+    }
   },
   "assetDetail": {
     "back": "Back to dashboard",
@@ -273,5 +277,12 @@
     "hint": "Export everything as CSV anytime, or import history from another tracker. The SQLite file in your data directory is a full backup on its own.",
     "exportButton": "Export transactions (CSV)",
     "importButton": "Import CSV"
+  },
+  "quickActions": {
+    "title": "Quick actions",
+    "addTransaction": "Add transaction",
+    "pickWallet": "Wallet…",
+    "import": "Import CSV",
+    "manageWallets": "Manage wallets"
   }
 }

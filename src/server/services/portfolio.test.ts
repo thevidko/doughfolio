@@ -86,7 +86,10 @@ describe("getPortfolioHistory", () => {
 
     expect(history.points.length).toBe(11);
     expect(history.points[0]?.value).toBe(1_000_000);
+    expect(history.points[0]?.invested).toBe(800_000);
     expect(history.points.at(-1)?.value).toBe(500_000);
+    // 800k bought − 500k sold at 1M per 0.5 BTC = 300k net invested.
+    expect(history.points.at(-1)?.invested).toBe(300_000);
   });
 
   it("respects the range parameter", async () => {
