@@ -5,7 +5,19 @@
     "back": "Back",
     "skip": "Skip",
     "loading": "Warming up the steamer…",
-    "logout": "Log out"
+    "logout": "Log out",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Rename",
+    "add": "Add",
+    "moveUp": "Move up",
+    "moveDown": "Move down"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "wallets": "Wallets",
+    "settings": "Settings"
   },
   "errors": {
     "validation": "Please check the highlighted fields.",
@@ -15,7 +27,33 @@
     "unknownFeature": "Unknown feature.",
     "network": "Cannot reach the server. Is the instance running?",
     "envMissing": "Missing configuration: {{vars}}. Add it to your .env file, restart the instance, and try again.",
-    "envCheckAgain": "Check again"
+    "envCheckAgain": "Check again",
+    "unauthorized": "Please log in first.",
+    "notFound": "That item no longer exists.",
+    "defaultGroupUndeletable": "The main steamer can't be deleted — it's where baskets live.",
+    "builtinStorageTypeUndeletable": "This storage type powers staking and can't be deleted (renaming is fine).",
+    "walletHasTransactions": "This wallet has transactions — it can't be deleted."
+  },
+  "wallets": {
+    "title": "Wallets",
+    "subtitle": "Your steamers and the baskets inside them.",
+    "addGroup": "Add a steamer",
+    "groupNamePlaceholder": "Steamer name",
+    "addWallet": "Add a basket",
+    "walletNamePlaceholder": "Wallet name",
+    "emptyGroup": "This steamer is empty — add your first basket!",
+    "noStorageType": "No type",
+    "confirmDeleteGroup": "Delete steamer \"{{name}}\"? Its wallets will move to the main steamer.",
+    "confirmDeleteWallet": "Delete wallet \"{{name}}\"?",
+    "defaultBadge": "main"
+  },
+  "settings": {
+    "title": "Settings",
+    "storageTypes": "Storage types",
+    "storageTypesHint": "Labels for how your wallets are stored (hot, cold, hardware…). The staking type is built-in: it tracks staked funds and can be renamed but not removed.",
+    "typeNamePlaceholder": "Type name",
+    "stakingBadge": "staking",
+    "confirmDeleteType": "Delete storage type \"{{name}}\"? Wallets using it will lose the label."
   },
   "setup": {
     "steps": {
