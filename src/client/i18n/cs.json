@@ -197,7 +197,11 @@
     },
     "missingPrices": "Některé ceny se nepodařilo dohledat — P/L může být neúplné.",
     "empty": "Grafy se probudí s první transakcí.",
-    "chartNeedsHistory": "Graf hodnoty se vykreslí, jakmile budou aspoň dva dny dat — nastav transakcím skutečná (zpětná) data, nebo se stav zítra."
+    "chartNeedsHistory": "Graf hodnoty se vykreslí, jakmile budou aspoň dva dny dat — nastav transakcím skutečná (zpětná) data, nebo se stav zítra.",
+    "series": {
+      "value": "Hodnota portfolia",
+      "invested": "Zainvestováno"
+    }
   },
   "assetDetail": {
     "back": "Zpět na přehled",
@@ -273,5 +277,12 @@
     "hint": "Kdykoli si vyexportuj vše jako CSV, nebo naimportuj historii z jiného trackeru. SQLite soubor v datovém adresáři je sám o sobě plná záloha.",
     "exportButton": "Exportovat transakce (CSV)",
     "importButton": "Import CSV"
+  },
+  "quickActions": {
+    "title": "Rychlé akce",
+    "addTransaction": "Přidat transakci",
+    "pickWallet": "Peněženka…",
+    "import": "Import CSV",
+    "manageWallets": "Správa peněženek"
   }
 }

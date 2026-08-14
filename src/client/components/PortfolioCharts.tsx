@@ -49,7 +49,7 @@ export function PortfolioCharts() {
         </p>
       )}
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
         <StatTile label={t("portfolio.tiles.totalValue")} value={money(summary.totalValue)} />
         <StatTile
           label={t("portfolio.tiles.change24h")}
