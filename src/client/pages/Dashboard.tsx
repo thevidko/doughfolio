@@ -1,10 +1,9 @@
 import { useTranslation } from "react-i18next";
+import { AppHeader } from "../components/AppHeader.tsx";
 import { Mascot } from "../components/Mascot.tsx";
 import { ServerStatus } from "../components/ServerStatus.tsx";
-import { Button } from "../components/ui/Button.tsx";
 import { Card } from "../components/ui/Card.tsx";
 import { useSetupStatus } from "../hooks/useSetupStatus.tsx";
-import { apiFetch } from "../lib/api.ts";
 
 /** Placeholder dashboard — real portfolio views arrive with the next features. */
 export function Dashboard() {
@@ -12,27 +11,9 @@ export function Dashboard() {
   const status = useSetupStatus();
   const setup = status.phase === "ready" ? status.status : null;
 
-  async function logout() {
-    await apiFetch("/api/session", { method: "DELETE" });
-    await status.refresh();
-  }
-
   return (
     <div className="min-h-dvh">
-      <header className="flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-3">
-          <Mascot size={44} still />
-          <span className="font-display text-xl font-bold">
-            <span className="text-dough">Dough</span>
-            <span className="text-matcha-dark">Folio</span>
-          </span>
-        </div>
-        {setup?.passwordRequired && (
-          <Button variant="ghost" onClick={() => void logout()}>
-            {t("common.logout")}
-          </Button>
-        )}
-      </header>
+      <AppHeader />
 
       <main className="mx-auto flex max-w-3xl flex-col items-center gap-8 p-6 text-center">
         <h1 className="animate-pop text-3xl font-bold">

@@ -4,7 +4,9 @@ import { SetupStatusProvider, useSetupStatus } from "./hooks/useSetupStatus.tsx"
 import { Dashboard } from "./pages/Dashboard.tsx";
 import { Login } from "./pages/Login.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
+import { Settings } from "./pages/Settings.tsx";
 import { SetupWizard } from "./pages/SetupWizard.tsx";
+import { Wallets } from "./pages/Wallets.tsx";
 
 /** Root application component. */
 export function App() {
@@ -33,6 +35,11 @@ function GatedRoutes() {
     <Routes>
       <Route path="/setup" element={completed ? <Navigate to="/" replace /> : <SetupWizard />} />
       <Route path="/" element={completed ? <Dashboard /> : <Navigate to="/setup" replace />} />
+      <Route path="/wallets" element={completed ? <Wallets /> : <Navigate to="/setup" replace />} />
+      <Route
+        path="/settings"
+        element={completed ? <Settings /> : <Navigate to="/setup" replace />}
+      />
       <Route path="*" element={completed ? <NotFound /> : <Navigate to="/setup" replace />} />
     </Routes>
   );

@@ -5,7 +5,19 @@
     "back": "Zpět",
     "skip": "Přeskočit",
     "loading": "Zahřívám napařovák…",
-    "logout": "Odhlásit se"
+    "logout": "Odhlásit se",
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "edit": "Přejmenovat",
+    "add": "Přidat",
+    "moveUp": "Posunout nahoru",
+    "moveDown": "Posunout dolů"
+  },
+  "nav": {
+    "dashboard": "Přehled",
+    "wallets": "Peněženky",
+    "settings": "Nastavení"
   },
   "errors": {
     "validation": "Zkontroluj prosím zvýrazněná pole.",
@@ -15,7 +27,33 @@
     "unknownFeature": "Neznámá funkce.",
     "network": "Server neodpovídá. Běží instance?",
     "envMissing": "Chybí konfigurace: {{vars}}. Přidej ji do souboru .env, restartuj instanci a zkus to znovu.",
-    "envCheckAgain": "Zkontrolovat znovu"
+    "envCheckAgain": "Zkontrolovat znovu",
+    "unauthorized": "Nejdřív se prosím přihlas.",
+    "notFound": "Tahle položka už neexistuje.",
+    "defaultGroupUndeletable": "Hlavní napařovák nejde smazat — v něm košíky bydlí.",
+    "builtinStorageTypeUndeletable": "Tento typ uložení pohání stakování a nejde smazat (přejmenovat ho můžeš).",
+    "walletHasTransactions": "Tahle peněženka má transakce — smazat ji nejde."
+  },
+  "wallets": {
+    "title": "Peněženky",
+    "subtitle": "Tvoje napařováky a košíky v nich.",
+    "addGroup": "Přidat napařovák",
+    "groupNamePlaceholder": "Název napařováku",
+    "addWallet": "Přidat košík",
+    "walletNamePlaceholder": "Název peněženky",
+    "emptyGroup": "Tenhle napařovák je prázdný — přidej první košík!",
+    "noStorageType": "Bez typu",
+    "confirmDeleteGroup": "Smazat napařovák „{{name}}“? Jeho peněženky se přesunou do hlavního napařováku.",
+    "confirmDeleteWallet": "Smazat peněženku „{{name}}“?",
+    "defaultBadge": "hlavní"
+  },
+  "settings": {
+    "title": "Nastavení",
+    "storageTypes": "Typy uložení",
+    "storageTypesHint": "Štítky podle způsobu uložení peněženek (hot, cold, hardware…). Typ pro stakování je vestavěný: sleduje nastakované prostředky, jde přejmenovat, ale ne odebrat.",
+    "typeNamePlaceholder": "Název typu",
+    "stakingBadge": "staking",
+    "confirmDeleteType": "Smazat typ uložení „{{name}}“? Peněženky s tímto typem o štítek přijdou."
   },
   "setup": {
     "steps": {

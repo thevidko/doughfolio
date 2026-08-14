@@ -58,3 +58,36 @@ export type EnvStatusResponse = {
   /** Names of required environment variables that are not set. */
   missing: string[];
 };
+
+/** A wallet group — a "steamer" (wallet-structure spec). */
+export type WalletGroupDto = {
+  id: string;
+  name: string;
+  /** The auto-created themed group; renamable, never deletable. */
+  isDefault: boolean;
+  sortOrder: number;
+};
+
+/** A storage-style label; `behavior: "staking"` marks staked funds. */
+export type StorageTypeDto = {
+  id: string;
+  name: string;
+  behavior: "plain" | "staking";
+  /** Built-in types are renamable but not deletable. */
+  builtin: boolean;
+  sortOrder: number;
+};
+
+/** A wallet — a "basket" inside a steamer. */
+export type WalletDto = {
+  id: string;
+  name: string;
+  kind: "manual" | "wallet" | "exchange";
+  groupId: string;
+  storageTypeId: string | null;
+  sortOrder: number;
+};
+
+export type WalletGroupListResponse = { groups: WalletGroupDto[] };
+export type StorageTypeListResponse = { storageTypes: StorageTypeDto[] };
+export type WalletListResponse = { wallets: WalletDto[] };

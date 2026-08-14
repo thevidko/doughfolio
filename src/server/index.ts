@@ -8,16 +8,26 @@
 import index from "../client/index.html";
 import { openDatabase } from "./db/index.ts";
 import { createEnvStatusRoute } from "./routes/env-status.ts";
+import { createGroupRoutes } from "./routes/groups.ts";
 import { healthRoute } from "./routes/health.ts";
 import { createSessionRoutes } from "./routes/session.ts";
 import { createSetupRoutes } from "./routes/setup.ts";
+import { createStorageTypeRoutes } from "./routes/storage-types.ts";
+import { createWalletRoutes } from "./routes/wallets.ts";
+import { ensureWalletDefaults } from "./services/wallet-defaults.ts";
 
 const isProduction = process.env.NODE_ENV === "production";
 
 // Opens the SQLite database and applies pending migrations before serving.
 const db = openDatabase(process.env.DATA_DIR ?? "./data");
+// Seeds/repairs the wallet structure (covers upgrades from pre-group versions).
+ensureWalletDefaults(db);
+
 const setup = createSetupRoutes(db);
 const session = createSessionRoutes(db);
+const groups = createGroupRoutes(db);
+const wallets = createWalletRoutes(db);
+const storageTypes = createStorageTypeRoutes(db);
 
 const server = Bun.serve({
   port: Number(process.env.PORT ?? 3000),
@@ -30,6 +40,24 @@ const server = Bun.serve({
     "/api/setup/complete": { POST: setup.complete },
     "/api/session": { GET: session.get, POST: session.login, DELETE: session.logout },
     "/api/env-status": createEnvStatusRoute(),
+    "/api/groups": { GET: (req) => groups.list(req), POST: (req) => groups.create(req) },
+    "/api/groups/:id": {
+      PATCH: (req) => groups.update(req, req.params.id),
+      DELETE: (req) => groups.remove(req, req.params.id),
+    },
+    "/api/wallets": { GET: (req) => wallets.list(req), POST: (req) => wallets.create(req) },
+    "/api/wallets/:id": {
+      PATCH: (req) => wallets.update(req, req.params.id),
+      DELETE: (req) => wallets.remove(req, req.params.id),
+    },
+    "/api/storage-types": {
+      GET: (req) => storageTypes.list(req),
+      POST: (req) => storageTypes.create(req),
+    },
+    "/api/storage-types/:id": {
+      PATCH: (req) => storageTypes.update(req, req.params.id),
+      DELETE: (req) => storageTypes.remove(req, req.params.id),
+    },
 
     // Frontend SPA — catch-all must stay last so API routes take precedence.
     "/*": index,

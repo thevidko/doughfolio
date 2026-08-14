@@ -3,7 +3,11 @@ import type { DbConn } from "../db/index.ts";
 import { settings } from "../db/schema.ts";
 
 /** Known setting keys — extend the union when a feature adds a preference. */
-export type SettingKey = "language" | "baseCurrency" | "setupCompletedAt";
+export type SettingKey =
+  | "language"
+  | "baseCurrency"
+  | "setupCompletedAt"
+  | "stakingRewardCostBasis";
 
 /** Read a setting; returns null when it has never been written. */
 export function getSetting<T>(db: DbConn, key: SettingKey): T | null {
