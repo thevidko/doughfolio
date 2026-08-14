@@ -170,5 +170,49 @@
     "checking": "Kontroluji napařovák…",
     "offline": "Server je offline",
     "online": "Server napařuje — v{{version}}"
+  },
+  "portfolio": {
+    "tiles": {
+      "totalValue": "Celková hodnota",
+      "change24h": "Změna za 24 h",
+      "unrealized": "Nerealizované P/L",
+      "realized": "Realizované P/L",
+      "feesPaid": "Zaplacené poplatky",
+      "rewards": "Odměny ze stakování"
+    },
+    "valueChart": "Hodnota portfolia",
+    "ranges": {
+      "7": "7D",
+      "30": "1M",
+      "90": "3M",
+      "365": "1R",
+      "all": "Vše"
+    },
+    "allocation": {
+      "title": "Rozložení",
+      "byAsset": "Podle coinu",
+      "byGroup": "Podle napařováku",
+      "byStorageType": "Podle uložení",
+      "other": "Ostatní"
+    },
+    "missingPrices": "Některé ceny se nepodařilo dohledat — P/L může být neúplné.",
+    "empty": "Grafy se probudí s první transakcí."
+  },
+  "assetDetail": {
+    "back": "Zpět na přehled",
+    "quantity": "Držba",
+    "value": "Aktuální hodnota",
+    "costBasis": "Pořizovací cena",
+    "priceChart": "Cena s tvými obchody"
+  },
+  "settingsPl": {
+    "title": "Výpočty portfolia",
+    "costBasisMethod": "Metoda cost basis",
+    "average": "Vážený průměr",
+    "fifo": "FIFO (první dovnitř, první ven)",
+    "rewardBasis": "Ocenění staking odměn",
+    "market": "Tržní cena při připsání",
+    "zero": "Nulová pořizovací cena",
+    "hint": "Změna přepočítá všechna P/L čísla okamžitě — uložená data se nemění."
   }
 }

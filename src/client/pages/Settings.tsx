@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppHeader } from "../components/AppHeader.tsx";
 import { Splash } from "../components/Splash.tsx";
+import { PlPreferences } from "../components/settings/PlPreferences.tsx";
 import { Button } from "../components/ui/Button.tsx";
 import { Card } from "../components/ui/Card.tsx";
 import { InlineNameForm } from "../components/wallets/InlineNameForm.tsx";
@@ -36,6 +37,8 @@ export function Settings() {
       <AppHeader />
       <main className="mx-auto max-w-3xl space-y-8 p-6">
         <h1 className="text-3xl font-bold">{t("settings.title")}</h1>
+
+        <PlPreferences />
 
         <Card className="space-y-4">
           <div>

@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router";
 import { Splash } from "./components/Splash.tsx";
 import { SetupStatusProvider, useSetupStatus } from "./hooks/useSetupStatus.tsx";
+import { AssetDetail } from "./pages/AssetDetail.tsx";
 import { Dashboard } from "./pages/Dashboard.tsx";
 import { Login } from "./pages/Login.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
@@ -40,6 +41,10 @@ function GatedRoutes() {
       <Route
         path="/wallets/:walletId"
         element={completed ? <WalletDetail /> : <Navigate to="/setup" replace />}
+      />
+      <Route
+        path="/assets/:assetId"
+        element={completed ? <AssetDetail /> : <Navigate to="/setup" replace />}
       />
       <Route
         path="/settings"

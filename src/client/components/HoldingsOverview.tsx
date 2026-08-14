@@ -2,6 +2,7 @@ import type { BalancesResponse, SpotPricesResponse } from "@shared/api.ts";
 import { Decimal, formatCurrency, formatQuantity } from "@shared/money.ts";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { apiFetch } from "../lib/api.ts";
 import { Mascot } from "./Mascot.tsx";
 import { Card } from "./ui/Card.tsx";
@@ -66,7 +67,12 @@ export function HoldingsOverview({ baseCurrency }: { baseCurrency: string }) {
           return (
             <li key={assetId} className="wobbly-2 border-2 border-ink/10 bg-cream px-3 py-2">
               <div className="flex items-baseline justify-between gap-2">
-                <span className="font-display font-bold uppercase">{assetId}</span>
+                <Link
+                  to={`/assets/${assetId}`}
+                  className="font-display font-bold uppercase underline-offset-4 hover:underline"
+                >
+                  {assetId}
+                </Link>
                 <span className="tabular-nums text-sm text-ink-soft">
                   {price
                     ? formatCurrency(
