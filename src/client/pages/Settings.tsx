@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { AppHeader } from "../components/AppHeader.tsx";
 import { Splash } from "../components/Splash.tsx";
 import { PlPreferences } from "../components/settings/PlPreferences.tsx";
@@ -39,6 +40,28 @@ export function Settings() {
         <h1 className="text-3xl font-bold">{t("settings.title")}</h1>
 
         <PlPreferences />
+
+        <Card className="space-y-3">
+          <div>
+            <h2 className="text-xl font-bold">{t("dataTools.title")}</h2>
+            <p className="mt-1 text-sm text-ink-soft">{t("dataTools.hint")}</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="/api/export/transactions.csv"
+              download
+              className="wobbly inline-flex items-center gap-2 border-2 border-ink bg-dough px-4 py-2 font-display font-semibold text-ink transition-transform hover:-rotate-1 active:scale-95"
+            >
+              ⬇️ {t("dataTools.exportButton")}
+            </a>
+            <Link
+              to="/import"
+              className="wobbly-2 inline-flex items-center gap-2 border-2 border-ink bg-surface px-4 py-2 font-display font-semibold text-ink transition-transform hover:rotate-1 active:scale-95"
+            >
+              ⬆️ {t("dataTools.importButton")}
+            </Link>
+          </div>
+        </Card>
 
         <Card className="space-y-4">
           <div>

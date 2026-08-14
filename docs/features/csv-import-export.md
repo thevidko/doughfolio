@@ -1,7 +1,6 @@
 # Feature: CSV import & export
 
-- **Status:** approved (owner request 2026-08-14: "pojďme udělat feature na
-  export a import dat, csv, párovat podle názvu sloupce, dialog na namapování")
+- **Status:** done (implemented 2026-08-14, released in v0.6.0)
 - **Priority:** must-have (PLANNING #15 — users own their data; also the
   practical migration path from other trackers)
 - **Depends on:** manual-transactions (done)
@@ -67,17 +66,17 @@ date-only timestamps).
 
 ## Acceptance criteria
 
-- [ ] The owner's real export (17 rows: BUYs in CZK + a TRANSFER with BTC
+- [x] The owner's real export (17 rows: BUYs in CZK + a TRANSFER with BTC
       network fee, date-only timestamps) imports fully: correct quantities,
       prices, currencies, the transfer as a linked pair with its fee, and
       dates preserved — verified end-to-end.
-- [ ] Export → import round-trip reproduces the same balances.
-- [ ] Preview guesses the mapping for the owner's file without manual fixes.
-- [ ] Broken rows (bad number, unknown date) are skipped and reported with
+- [x] Export → import round-trip reproduces the same balances.
+- [x] Preview guesses the mapping for the owner's file without manual fixes.
+- [x] Broken rows (bad number, unknown date) are skipped and reported with
       line numbers; valid rows still import.
-- [ ] Parser unit tests: quotes, embedded delimiters, CRLF, `;` files,
+- [x] Parser unit tests: quotes, embedded delimiters, CRLF, `;` files,
       decimal commas.
-- [ ] All UI strings via i18n (EN + CS), both themes.
+- [x] All UI strings via i18n (EN + CS), both themes.
 
 ## Open questions
 

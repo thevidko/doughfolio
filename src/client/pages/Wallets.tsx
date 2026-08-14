@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { AppHeader } from "../components/AppHeader.tsx";
 import { Splash } from "../components/Splash.tsx";
 import { Button } from "../components/ui/Button.tsx";
@@ -36,9 +37,17 @@ export function Wallets() {
     <div className="min-h-dvh">
       <AppHeader />
       <main className="mx-auto max-w-5xl space-y-10 p-6">
-        <div>
-          <h1 className="text-3xl font-bold">{t("wallets.title")}</h1>
-          <p className="text-ink-soft">{t("wallets.subtitle")}</p>
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h1 className="text-3xl font-bold">{t("wallets.title")}</h1>
+            <p className="text-ink-soft">{t("wallets.subtitle")}</p>
+          </div>
+          <Link
+            to="/import"
+            className="font-semibold text-ink-soft underline-offset-4 hover:text-ink hover:underline"
+          >
+            ⬆️ {t("dataTools.importButton")}
+          </Link>
         </div>
 
         {errorMessage && (

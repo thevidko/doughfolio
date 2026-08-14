@@ -195,6 +195,37 @@ export type AssetDetailResponse = {
   rewardsValue: string;
 };
 
+/** `POST /api/import/preview` — parsed shape + guessed mapping. */
+export type ImportPreviewResponse = {
+  headers: string[];
+  rowCount: number;
+  /** First rows, aligned with `headers`, for the mapping preview table. */
+  sample: string[][];
+  /** Guessed column indexes by target field (header-name heuristics). */
+  guess: {
+    date?: number;
+    quantity?: number;
+    unitPrice?: number;
+    priceCurrency?: number;
+    feeQuantity?: number;
+    feeCurrency?: number;
+    note?: number;
+    type?: number;
+    asset?: number;
+  };
+  /** Distinct values of the guessed type column (uppercased, max 20). */
+  typeValues: string[];
+};
+
+/** `POST /api/import/commit` — outcome per row. */
+export type ImportCommitResponse = {
+  imported: number;
+  /** Rows that could not be imported (1-based CSV line numbers). */
+  skipped: { line: number; reason: string }[];
+  /** Rows imported with a caveat (e.g. a fiat fee was dropped). */
+  warnings: { line: number; reason: string }[];
+};
+
 /** `GET/PATCH /api/settings` — user preferences (PLANNING #18). */
 export type SettingsResponse = {
   language: string;

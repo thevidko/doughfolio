@@ -215,5 +215,63 @@
     "market": "Tržní cena při připsání",
     "zero": "Nulová pořizovací cena",
     "hint": "Změna přepočítá všechna P/L čísla okamžitě — uložená data se nemění."
+  },
+  "import": {
+    "title": "Import CSV",
+    "subtitle": "Přenes transakce z jiného trackeru — namapuj jeho sloupce na pole DoughFolia.",
+    "pickFile": "Vybrat CSV soubor",
+    "targetWallet": "Importovat do peněženky",
+    "loadPreview": "Načíst náhled",
+    "rows": "{{count}} řádků",
+    "mappingTitle": "Mapování sloupců",
+    "sampleTitle": "Náhled souboru",
+    "notMapped": "— nemapováno —",
+    "fixedValue": "Pevná hodnota…",
+    "fields": {
+      "date": "Datum",
+      "quantity": "Množství",
+      "unitPrice": "Cena za jednotku",
+      "priceCurrency": "Měna ceny",
+      "feeQuantity": "Výše poplatku",
+      "feeCurrency": "Měna poplatku",
+      "note": "Poznámka",
+      "asset": "Coin",
+      "type": "Typ transakce"
+    },
+    "fixedAsset": "Jeden coin pro všechny řádky",
+    "assetColumn": "Sloupec s tickery",
+    "typeMappingTitle": "Hodnoty typů",
+    "typeMappingHint": "Řekni DoughFoliu, co která hodnota ve sloupci typu znamená.",
+    "actions": {
+      "buy": "Nákup",
+      "sell": "Prodej",
+      "reward": "Odměna ze stakování",
+      "transfer": "Převod do…",
+      "skip": "Tyto řádky přeskočit"
+    },
+    "runImport": "Importovat {{count}} řádků",
+    "doneTitle": "Import dokončen!",
+    "imported": "{{count}} transakcí importováno",
+    "skippedTitle": "Přeskočené řádky",
+    "warningsTitle": "Upozornění",
+    "line": "Řádek {{line}}",
+    "reasons": {
+      "unknown_type": "nenamapovaný typ „{{value}}“",
+      "unknown_asset": "neznámý coin „{{value}}“",
+      "invalid_quantity": "nečitelné množství",
+      "invalid_date": "nečitelné datum",
+      "missing_price": "chybí cena",
+      "unknown_currency": "nepodporovaná měna „{{value}}“",
+      "transfer_without_destination": "převod bez cílové peněženky",
+      "write_failed": "nepodařilo se zapsat",
+      "fee_dropped": "poplatek v {{value}} byl vynechán (fiat poplatky zatím neimportujeme)"
+    },
+    "openDashboard": "Otevřít přehled"
+  },
+  "dataTools": {
+    "title": "Tvoje data",
+    "hint": "Kdykoli si vyexportuj vše jako CSV, nebo naimportuj historii z jiného trackeru. SQLite soubor v datovém adresáři je sám o sobě plná záloha.",
+    "exportButton": "Exportovat transakce (CSV)",
+    "importButton": "Import CSV"
   }
 }

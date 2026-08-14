@@ -215,5 +215,63 @@
     "market": "Market price at receipt",
     "zero": "Zero cost basis",
     "hint": "Changing these recalculates all P/L figures instantly — stored data never changes."
+  },
+  "import": {
+    "title": "CSV import",
+    "subtitle": "Bring transactions from another tracker — map its columns to DoughFolio fields.",
+    "pickFile": "Choose a CSV file",
+    "targetWallet": "Import into wallet",
+    "loadPreview": "Load preview",
+    "rows": "{{count}} rows",
+    "mappingTitle": "Column mapping",
+    "sampleTitle": "File preview",
+    "notMapped": "— not mapped —",
+    "fixedValue": "Fixed value…",
+    "fields": {
+      "date": "Date",
+      "quantity": "Amount",
+      "unitPrice": "Price per unit",
+      "priceCurrency": "Price currency",
+      "feeQuantity": "Fee amount",
+      "feeCurrency": "Fee currency",
+      "note": "Note",
+      "asset": "Coin",
+      "type": "Transaction type"
+    },
+    "fixedAsset": "One coin for all rows",
+    "assetColumn": "Column with ticker symbols",
+    "typeMappingTitle": "Type values",
+    "typeMappingHint": "Tell DoughFolio what each value in the type column means.",
+    "actions": {
+      "buy": "Buy",
+      "sell": "Sell",
+      "reward": "Staking reward",
+      "transfer": "Transfer to…",
+      "skip": "Skip these rows"
+    },
+    "runImport": "Import {{count}} rows",
+    "doneTitle": "Import finished!",
+    "imported": "{{count}} transactions imported",
+    "skippedTitle": "Skipped rows",
+    "warningsTitle": "Warnings",
+    "line": "Line {{line}}",
+    "reasons": {
+      "unknown_type": "unmapped type \"{{value}}\"",
+      "unknown_asset": "unknown coin \"{{value}}\"",
+      "invalid_quantity": "unreadable amount",
+      "invalid_date": "unreadable date",
+      "missing_price": "missing price",
+      "unknown_currency": "unsupported currency \"{{value}}\"",
+      "transfer_without_destination": "transfer without a destination wallet",
+      "write_failed": "could not be written",
+      "fee_dropped": "fee in {{value}} was dropped (fiat fees are not imported yet)"
+    },
+    "openDashboard": "Open dashboard"
+  },
+  "dataTools": {
+    "title": "Your data",
+    "hint": "Export everything as CSV anytime, or import history from another tracker. The SQLite file in your data directory is a full backup on its own.",
+    "exportButton": "Export transactions (CSV)",
+    "importButton": "Import CSV"
   }
 }
