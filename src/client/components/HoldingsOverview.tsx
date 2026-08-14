@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import { apiFetch } from "../lib/api.ts";
 import { Mascot } from "./Mascot.tsx";
 import { Card } from "./ui/Card.tsx";
+import { Skeleton } from "./ui/Skeleton.tsx";
 
 /** Dashboard summary: total portfolio value and per-asset holdings. */
 export function HoldingsOverview({ baseCurrency }: { baseCurrency: string }) {
@@ -30,7 +31,7 @@ export function HoldingsOverview({ baseCurrency }: { baseCurrency: string }) {
   const holdings = Object.entries(balances?.totals ?? {}).filter(
     ([, quantity]) => !new Decimal(quantity).isZero(),
   );
-  if (!balances) return null;
+  if (!balances) return <Skeleton className="h-40 w-full" />;
 
   // Empty portfolio → the mascot invites the first transaction instead.
   if (holdings.length === 0) {

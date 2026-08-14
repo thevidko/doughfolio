@@ -38,7 +38,10 @@ see `CLAUDE.md`.
 ## Release channels
 
 - **Stable** — a `vX.Y.Z` tag on `main`, created by `bun run release`.
-  Users self-host these.
+  Users self-host these. Semver discipline (owner request 2026-08-14):
+  **minor** (`0.X.0`) for new features, **patch** (`0.X.Y`) for fixes and UI
+  polish. Releases need not be cut per change — work can accumulate on
+  `develop` (the edge channel) until a batch is worth shipping.
 - **Dev (edge)** — the tip of `develop`. Once CI/CD is set up, every merge to
   `develop` will produce a dev build automatically.
 

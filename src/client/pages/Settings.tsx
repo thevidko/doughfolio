@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
-import { AppHeader } from "../components/AppHeader.tsx";
+import { AppShell } from "../components/AppShell.tsx";
 import { Splash } from "../components/Splash.tsx";
 import { PlPreferences } from "../components/settings/PlPreferences.tsx";
 import { Button } from "../components/ui/Button.tsx";
@@ -34,8 +34,7 @@ export function Settings() {
   }
 
   return (
-    <div className="min-h-dvh">
-      <AppHeader />
+    <AppShell>
       <main className="mx-auto max-w-3xl space-y-8 p-6">
         <h1 className="text-3xl font-bold">{t("settings.title")}</h1>
 
@@ -129,6 +128,6 @@ export function Settings() {
           />
         </Card>
       </main>
-    </div>
+    </AppShell>
   );
 }

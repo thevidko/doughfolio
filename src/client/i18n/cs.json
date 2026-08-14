@@ -17,7 +17,8 @@
   "nav": {
     "dashboard": "Přehled",
     "wallets": "Peněženky",
-    "settings": "Nastavení"
+    "settings": "Nastavení",
+    "menu": "Menu"
   },
   "errors": {
     "validation": "Zkontroluj prosím zvýrazněná pole.",
@@ -48,7 +49,8 @@
     "confirmDeleteGroup": "Smazat napařovák „{{name}}“? Jeho peněženky se přesunou do hlavního napařováku.",
     "confirmDeleteWallet": "Smazat peněženku „{{name}}“?",
     "defaultBadge": "hlavní",
-    "openTransactions": "Transakce a zůstatek"
+    "openTransactions": "Transakce a zůstatek",
+    "editWallet": "Nastavení peněženky"
   },
   "transactions": {
     "title": "Transakce",
@@ -284,5 +286,21 @@
     "pickWallet": "Peněženka…",
     "import": "Import CSV",
     "manageWallets": "Správa peněženek"
+  },
+  "stats": {
+    "title": "Přehled",
+    "totalValue": "Celková hodnota",
+    "invested": "Zainvestováno",
+    "investedHint": "Kolik jsi vložil: nákupy minus výnosy z prodejů",
+    "change24h": "Změna za 24 h",
+    "change24hHint": "Změna hodnoty oproti včerejšímu závěru",
+    "unrealized": "Nerealizované P/L",
+    "unrealizedHint": "Papírový zisk coinů, které stále držíš (hodnota − náklady)",
+    "realized": "Realizované P/L",
+    "realizedHint": "Uzamčený zisk z coinů, které jsi už prodal",
+    "feesPaid": "Zaplacené poplatky",
+    "feesPaidHint": "Všechny poplatky burz a sítí v tržní hodnotě",
+    "rewards": "Odměny ze stakování",
+    "rewardsHint": "Tržní hodnota odměn v momentě připsání"
   }
 }

@@ -54,13 +54,16 @@ export function GroupSection({
         ) : (
           <>
             <h2 className="text-2xl font-bold">🧺 {group.name}</h2>
+            <span className="rounded-full bg-cream-dark px-2 py-0.5 text-xs font-semibold text-ink-soft">
+              {wallets.length}
+            </span>
             {group.isDefault && (
               <span className="wobbly bg-cream-dark px-2 py-0.5 text-xs font-semibold text-ink-soft">
                 {t("wallets.defaultBadge")}
               </span>
             )}
-            <Button variant="ghost" onClick={() => setRenaming(true)}>
-              {t("common.edit")}
+            <Button variant="ghost" aria-label={t("common.edit")} onClick={() => setRenaming(true)}>
+              ✏️
             </Button>
             {!group.isDefault && (
               <Button
