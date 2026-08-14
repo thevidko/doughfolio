@@ -50,7 +50,9 @@
     "confirmDeleteWallet": "Delete wallet \"{{name}}\"?",
     "defaultBadge": "main",
     "openTransactions": "Transactions & balance",
-    "editWallet": "Wallet settings"
+    "editWallet": "Wallet settings",
+    "defaultAsset": "Default coin",
+    "defaultAssetHint": "Pre-fills new transactions in this wallet"
   },
   "transactions": {
     "title": "Transactions",
