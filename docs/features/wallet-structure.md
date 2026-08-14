@@ -124,5 +124,5 @@ group move, storage type, sort); `GET/POST /api/storage-types`,
 
 ## Open questions
 
-- Storage-type color/icon: plain text chips for now, or pick a color per type
-  already in this feature?
+_None — resolved 2026-08-09 (delegated): plain text chips in this feature;
+per-type colors/icons arrive with a later visual-polish pass._

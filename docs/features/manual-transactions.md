@@ -34,9 +34,14 @@ One row = one movement in one wallet. Types:
   `price_currency` (any supported currency, defaults to the base currency).
   The P/L engine converts to the base currency via cached historical rates —
   the record stays an honest copy of what actually happened on the exchange.
-- **Fees**: optional `fee_quantity` + `fee_asset_id` per transaction (fees are
-  paid in the traded asset, the quote currency, or an exchange token — hence
-  asset-typed, not currency-typed). The P/L engine treats fees as cost.
+- **Fees**: optional `fee_quantity` + `fee_asset_id` on **every** type (fees
+  are paid in the traded asset, the quote currency, or an exchange token —
+  hence asset-typed, not currency-typed). This covers **network fees** too
+  (owner requirement 2026-08-09): a transfer's network fee is recorded on the
+  `transfer_out` row (e.g. sending BTC costs BTC), reducing that wallet's
+  balance. P/L treatment (see portfolio-analytics.md): buy fees increase cost
+  basis, sell fees reduce proceeds, transfer/reward fees are expensed at the
+  market price of the fee asset at `occurred_at`.
 
 ### Columns (`transactions`)
 
@@ -120,5 +125,6 @@ adopted there: wallet deletion is blocked once transactions exist.
 
 ## Open questions
 
-- Should `price_currency` allow crypto quotes (BTC pairs) in the MVP form, or
-  fiat only with crypto pairs later? (Schema supports both either way.)
+_None — resolved 2026-08-09 (delegated): `price_currency` allows any supported
+currency including crypto quotes (BTC/ETH pairs) from the start; the picker
+reuses the supported-currencies list and defaults to the base currency._
