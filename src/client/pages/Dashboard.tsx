@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { AppHeader } from "../components/AppHeader.tsx";
 import { HoldingsOverview } from "../components/HoldingsOverview.tsx";
+import { PortfolioCharts } from "../components/PortfolioCharts.tsx";
 import { ServerStatus } from "../components/ServerStatus.tsx";
 import { useSetupStatus } from "../hooks/useSetupStatus.tsx";
 
@@ -20,6 +21,8 @@ export function Dashboard() {
             ? t("dashboard.greeting", { name: setup.displayName })
             : t("dashboard.greetingAnonymous")}
         </h1>
+
+        <PortfolioCharts />
 
         <HoldingsOverview baseCurrency={setup?.baseCurrency ?? "usd"} />
 

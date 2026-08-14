@@ -37,6 +37,23 @@
   --duration-pop: 220ms;
 }
 
+/*
+ * Categorical chart palette — fixed assignment order, never cycled.
+ * Validated with the dataviz six-checks script against --color-surface
+ * (light: all PASS; dark: worst adjacent ΔE 7.5, legal because donut
+ * segments always carry 2px surface gaps + direct labels).
+ * Plain :root (not @theme): Tailwind prunes unused theme variables, and
+ * these are read from JavaScript, not from utility classes.
+ */
+:root {
+  --color-chart-1: #b57424;
+  --color-chart-2: #3b82d1;
+  --color-chart-3: #d05a8c;
+  --color-chart-4: #2f9e44;
+  --color-chart-5: #8a63c0;
+  --color-chart-6: #b3452c;
+}
+
 /* Warm cocoa dark theme — same hues, cozy instead of gray (DESIGN.md). */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -51,6 +68,12 @@
     --color-blush-dark: #e58089;
     --color-ink: #f0e6d2;
     --color-ink-soft: #b49a82;
+    --color-chart-1: #d99a43;
+    --color-chart-2: #6ba3e8;
+    --color-chart-3: #e87fab;
+    --color-chart-4: #57c06c;
+    --color-chart-5: #ab8ce0;
+    --color-chart-6: #d8694a;
   }
 }
 

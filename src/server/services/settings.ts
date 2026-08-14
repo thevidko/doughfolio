@@ -7,7 +7,8 @@ export type SettingKey =
   | "language"
   | "baseCurrency"
   | "setupCompletedAt"
-  | "stakingRewardCostBasis";
+  | "stakingRewardCostBasis"
+  | "costBasisMethod";
 
 /** Read a setting; returns null when it has never been written. */
 export function getSetting<T>(db: DbConn, key: SettingKey): T | null {

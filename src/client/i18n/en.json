@@ -47,7 +47,8 @@
     "noStorageType": "No type",
     "confirmDeleteGroup": "Delete steamer \"{{name}}\"? Its wallets will move to the main steamer.",
     "confirmDeleteWallet": "Delete wallet \"{{name}}\"?",
-    "defaultBadge": "main"
+    "defaultBadge": "main",
+    "openTransactions": "Transactions & balance"
   },
   "transactions": {
     "title": "Transactions",
@@ -169,5 +170,49 @@
     "checking": "Checking the steamer…",
     "offline": "Server is offline",
     "online": "Server is steaming — v{{version}}"
+  },
+  "portfolio": {
+    "tiles": {
+      "totalValue": "Total value",
+      "change24h": "24h change",
+      "unrealized": "Unrealized P/L",
+      "realized": "Realized P/L",
+      "feesPaid": "Fees paid",
+      "rewards": "Staking rewards"
+    },
+    "valueChart": "Portfolio value",
+    "ranges": {
+      "7": "7D",
+      "30": "1M",
+      "90": "3M",
+      "365": "1Y",
+      "all": "All"
+    },
+    "allocation": {
+      "title": "Allocation",
+      "byAsset": "By coin",
+      "byGroup": "By steamer",
+      "byStorageType": "By storage",
+      "other": "Other"
+    },
+    "missingPrices": "Some prices could not be resolved — P/L may be incomplete.",
+    "empty": "Charts wake up with your first transaction."
+  },
+  "assetDetail": {
+    "back": "Back to dashboard",
+    "quantity": "Holdings",
+    "value": "Current value",
+    "costBasis": "Cost basis",
+    "priceChart": "Price with your trades"
+  },
+  "settingsPl": {
+    "title": "Portfolio math",
+    "costBasisMethod": "Cost basis method",
+    "average": "Weighted average",
+    "fifo": "FIFO (first in, first out)",
+    "rewardBasis": "Staking reward valuation",
+    "market": "Market price at receipt",
+    "zero": "Zero cost basis",
+    "hint": "Changing these recalculates all P/L figures instantly — stored data never changes."
   }
 }

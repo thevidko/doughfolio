@@ -147,3 +147,58 @@ export type SpotPricesResponse = {
   /** True when at least one price came from an expired cache (offline). */
   stale: boolean;
 };
+
+/** `GET /api/portfolio/summary` — headline stats in the base currency. */
+export type PortfolioSummaryResponse = {
+  baseCurrency: string;
+  costBasisMethod: "average" | "fifo";
+  totalValue: string;
+  costBasis: string;
+  unrealized: string;
+  realized: string;
+  feesPaid: string;
+  rewardsValue: string;
+  /** Absolute change vs. yesterday's daily close; null when history is missing. */
+  change24h: string | null;
+  stale: boolean;
+  /** Diagnostic list of prices the engine could not resolve (valued as 0). */
+  missingPrices: string[];
+};
+
+/** `GET /api/portfolio/history?days=…` — chart series (numbers at the edge). */
+export type PortfolioHistoryResponse = {
+  baseCurrency: string;
+  points: { date: string; value: number }[];
+};
+
+export type AllocationSlice = { key: string; label: string; value: number };
+
+/** `GET /api/portfolio/allocation` — current value split three ways. */
+export type PortfolioAllocationResponse = {
+  baseCurrency: string;
+  byAsset: AllocationSlice[];
+  byGroup: AllocationSlice[];
+  byStorageType: AllocationSlice[];
+};
+
+/** `GET /api/portfolio/asset/:assetId?days=…` — per-asset detail with trades. */
+export type AssetDetailResponse = {
+  assetId: string;
+  baseCurrency: string;
+  series: { date: string; price: number }[];
+  markers: { date: string; type: TransactionDto["type"]; quantity: string }[];
+  quantity: string;
+  value: string | null;
+  costBasis: string;
+  realized: string;
+  feesPaid: string;
+  rewardsValue: string;
+};
+
+/** `GET/PATCH /api/settings` — user preferences (PLANNING #18). */
+export type SettingsResponse = {
+  language: string;
+  baseCurrency: string;
+  costBasisMethod: "average" | "fifo";
+  stakingRewardCostBasis: "market" | "zero";
+};

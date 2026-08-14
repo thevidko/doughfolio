@@ -143,6 +143,13 @@ export function WalletCard({
           ))}
         </select>
       </div>
+
+      <Link
+        to={`/wallets/${wallet.id}`}
+        className="wobbly mt-3 inline-flex items-center gap-2 border-2 border-ink bg-dough px-4 py-1.5 font-display font-semibold text-ink transition-transform hover:-rotate-1 active:scale-95"
+      >
+        📒 {t("wallets.openTransactions")}
+      </Link>
     </div>
   );
 }

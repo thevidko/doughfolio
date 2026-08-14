@@ -14,6 +14,7 @@ import { healthRoute } from "./routes/health.ts";
 import { createPortfolioRoutes } from "./routes/portfolio.ts";
 import { createPriceRoutes } from "./routes/prices.ts";
 import { createSessionRoutes } from "./routes/session.ts";
+import { createSettingsRoutes } from "./routes/settings.ts";
 import { createSetupRoutes } from "./routes/setup.ts";
 import { createStorageTypeRoutes } from "./routes/storage-types.ts";
 import { createTransactionRoutes } from "./routes/transactions.ts";
@@ -36,6 +37,7 @@ const txns = createTransactionRoutes(db);
 const assets = createAssetRoutes(db);
 const prices = createPriceRoutes(db);
 const portfolio = createPortfolioRoutes(db);
+const settings = createSettingsRoutes(db);
 
 const server = Bun.serve({
   port: Number(process.env.PORT ?? 3000),
@@ -75,6 +77,13 @@ const server = Bun.serve({
     "/api/assets": { GET: (req) => assets.search(req) },
     "/api/prices/spot": { GET: (req) => prices.spot(req) },
     "/api/portfolio/balances": { GET: (req) => portfolio.balances(req) },
+    "/api/portfolio/summary": { GET: (req) => portfolio.summary(req) },
+    "/api/portfolio/history": { GET: (req) => portfolio.history(req) },
+    "/api/portfolio/allocation": { GET: (req) => portfolio.allocation(req) },
+    "/api/portfolio/asset/:assetId": {
+      GET: (req) => portfolio.assetDetail(req, req.params.assetId),
+    },
+    "/api/settings": { GET: (req) => settings.get(req), PATCH: (req) => settings.update(req) },
 
     // Frontend SPA — catch-all must stay last so API routes take precedence.
     "/*": index,
