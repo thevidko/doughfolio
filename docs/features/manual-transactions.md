@@ -1,7 +1,6 @@
 # Feature: Manual transactions
 
-- **Status:** draft (data model designed ahead of time to validate
-  wallet-structure; UI details may still evolve)
+- **Status:** done (implemented 2026-08-14, released in v0.4.0)
 - **Priority:** must-have (the heart of the app)
 - **Depends on:** wallet-structure
 

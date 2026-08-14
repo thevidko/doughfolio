@@ -30,6 +30,8 @@
     "envCheckAgain": "Check again",
     "unauthorized": "Please log in first.",
     "notFound": "That item no longer exists.",
+    "priceApi": "The price service is unreachable right now — showing cached data where possible.",
+    "transferSameWallet": "A transfer needs two different wallets.",
     "defaultGroupUndeletable": "The main steamer can't be deleted — it's where baskets live.",
     "builtinStorageTypeUndeletable": "This storage type powers staking and can't be deleted (renaming is fine).",
     "walletHasTransactions": "This wallet has transactions — it can't be deleted."
@@ -46,6 +48,57 @@
     "confirmDeleteGroup": "Delete steamer \"{{name}}\"? Its wallets will move to the main steamer.",
     "confirmDeleteWallet": "Delete wallet \"{{name}}\"?",
     "defaultBadge": "main"
+  },
+  "transactions": {
+    "title": "Transactions",
+    "add": "Add transaction",
+    "types": {
+      "buy": "Buy",
+      "sell": "Sell",
+      "transfer": "Transfer",
+      "transfer_in": "Transfer in",
+      "transfer_out": "Transfer out",
+      "reward": "Staking reward"
+    },
+    "form": {
+      "asset": "Coin",
+      "assetPlaceholder": "Search coins (BTC, ethereum…)",
+      "quantity": "Amount",
+      "unitPrice": "Price per unit",
+      "priceCurrency": "Price currency",
+      "fromWallet": "From wallet",
+      "toWallet": "To wallet",
+      "date": "Date",
+      "note": "Note (optional)",
+      "addFee": "+ Add fee (network / exchange)",
+      "feeQuantity": "Fee amount",
+      "feeAsset": "Fee coin",
+      "removeFee": "Remove fee",
+      "submit": "Save transaction",
+      "invalidAmount": "Enter a positive number (e.g. 0.5)."
+    },
+    "table": {
+      "date": "Date",
+      "type": "Type",
+      "asset": "Coin",
+      "quantity": "Amount",
+      "price": "Price",
+      "fee": "Fee",
+      "balance": "Balance",
+      "note": "Note"
+    },
+    "empty": "No transactions yet — record your first buy!",
+    "confirmDelete": "Delete this transaction? A transfer removes both sides.",
+    "overdrawnWarning": "Some balances go negative — a sell or transfer exceeds what was available. Check the history.",
+    "staleprices": "Prices are cached (the price service is unreachable).",
+    "edit": "Edit"
+  },
+  "holdings": {
+    "title": "Holdings",
+    "totalValue": "Total value",
+    "staked": "staked",
+    "walletValue": "Wallet value",
+    "noPrices": "Value unavailable"
   },
   "settings": {
     "title": "Settings",
